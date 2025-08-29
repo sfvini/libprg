@@ -45,3 +45,7 @@ int* listar(pilha *p) {
     }
     return cc;
 }
+
+int tamanho(pilha *p) {
+    return p->topo + 1;
+}

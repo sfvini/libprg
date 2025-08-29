@@ -12,6 +12,7 @@ int adicionar(pilha *p, int e);
 int remover(pilha *p);
 int topo(pilha *p);
 int* listar(pilha *p);
+int tamanho(pilha *p);
 
 
 #endif
