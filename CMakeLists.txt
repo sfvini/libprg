@@ -18,4 +18,3 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   # For IDEs indexing
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 endif()
-

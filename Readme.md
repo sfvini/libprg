@@ -1,4 +1,4 @@
-# A minimal C library template using Modern CMake
+        # A minimal C library template using Modern CMake
 
 An example to demonstrate how to organize files for writing a library in the C language using Modern CMake.
 
@@ -16,9 +16,7 @@ An example to demonstrate how to organize files for writing a library in the C l
         |   `-- libprg
         |       `-- libprg.h
         `-- libprg
-            |-- libprg.c
-            |-- sub.c
-            `-- sum.c
+            |-- pilha.c
 ```
 
 ## How to use this library in a C application using CMake
@@ -37,7 +35,7 @@ include(FetchContent)
 
 FetchContent_Declare(
     libprg
-    GIT_REPOSITORY https://github.com/emersonmello/libprg.git
+    GIT_REPOSITORY https://github.com/sfvini/libprg.git
     GIT_TAG origin/main 
     # or GIT_TAG 0.0.1
     
@@ -54,17 +52,7 @@ target_link_libraries(myapp PUBLIC libprg)
 
 And your `main.c`  should look like this:
 ```c
-#include <stdio.h>
-#include <libprg/libprg.h>
 
-int main(void) {
-    int a = 1, b = 2;
-
-    result_t r = compute(a, b, SUM);
-    printf("%d + %d = %8.2f", a, b, r.value);
-
-    return 0;
-}
 ```
 
 # References
