@@ -37,3 +37,11 @@ int topo(pilha *p) {
         return -1;
     }
 }
+
+int* listar(pilha *p) {
+    int* cc = malloc(sizeof(int) * (p->topo + 1));
+    for (int i = 0; i <= p->topo; i++) {
+        cc[i] = p->elementos[i];
+    }
+    return cc;
+}
