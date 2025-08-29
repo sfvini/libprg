@@ -7,6 +7,7 @@ typedef struct pilha {
     int capacidade;
 } pilha;
 
-pilha* criar_pilha(int capacidade);
+pilha* criar(int capacidade);
+int adicionar(pilha* pilha, int* e);
 
 #endif
