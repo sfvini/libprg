@@ -9,5 +9,6 @@ typedef struct pilha {
 
 pilha* criar(int capacidade);
 int adicionar(pilha* pilha, int* e);
+int remover(pilha *p)
 
 #endif

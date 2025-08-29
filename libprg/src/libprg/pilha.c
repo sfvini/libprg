@@ -18,3 +18,14 @@ int adicionar(pilha *p, int e) {
         return 0;
     }
 }
+
+int remover(pilha *p) {
+    if (p->topo >= 0) {
+        int elemento = p->elementos[p->topo];
+        p->topo--;
+        return elemento;
+    }
+    else {
+        return -1;
+    }
+}
