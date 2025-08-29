@@ -29,3 +29,11 @@ int remover(pilha *p) {
         return -1;
     }
 }
+
+int topo(pilha *p) {
+    if (p->topo >= 0) {
+        return p->elementos[p->topo];
+    } else {
+        return -1;
+    }
+}
