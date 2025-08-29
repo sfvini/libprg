@@ -13,6 +13,7 @@ int remover(pilha *p);
 int topo(pilha *p);
 int* listar(pilha *p);
 int tamanho(pilha *p);
+void apagar(pilha *p);
 
 
 #endif

@@ -49,3 +49,8 @@ int* listar(pilha *p) {
 int tamanho(pilha *p) {
     return p->topo + 1;
 }
+
+void apagar(pilha *p) {
+    free(p->elementos);
+    free(p);
+}
