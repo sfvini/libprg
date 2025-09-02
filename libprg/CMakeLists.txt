@@ -8,7 +8,7 @@ set(HEADERS
 )
 
 set(SOURCES
-        "${CMAKE_CURRENT_LIST_DIR}/src/libprg/libprg.c"
+        "${CMAKE_CURRENT_LIST_DIR}/src/libprg/pilha.c"
         src/include/libprg/libprg.h
 )
 
