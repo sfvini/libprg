@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <libprg/libprg.h>
+#include <libprg/pilha.h>
 
 pilha* criar(int capacidade) {
     pilha *p = malloc(sizeof(pilha));
