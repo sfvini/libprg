@@ -1,5 +1,5 @@
-#ifndef LIBPRG_H
-#define LIBPRG_H
+#ifndef PILHA_H
+#define PILHA_H
 
 typedef struct pilha {
     int *elementos;
