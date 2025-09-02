@@ -1,7 +1,7 @@
-#ifndef PILHA_H
-#define PILHA_H
+#ifndef LIBPRG_H
+#define LIBPRG_H
 
-typedef struct pilha {
+typedef struct libprg {
     int *elementos;
     int topo;
     int capacidade;

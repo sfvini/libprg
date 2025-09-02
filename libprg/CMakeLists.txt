@@ -4,16 +4,16 @@ project(libprg C)
 set(CMAKE_C_STANDARD 17)
 
 set(HEADERS
-        "${CMAKE_CURRENT_LIST_DIR}/src/include/libprg/pilha.h"
+        "${CMAKE_CURRENT_LIST_DIR}/src/include/libprg/libprg.h"
 )
 
 set(SOURCES
-        "${CMAKE_CURRENT_LIST_DIR}/src/libprg/pilha.c"
-        src/include/libprg/pilha.h
-        src/libprg/rpn.c
+        "${CMAKE_CURRENT_LIST_DIR}/src/libprg/libprg.c"
+        src/include/libprg/libprg.h
 )
 
-add_library(libprg ${SOURCES})
+add_library(libprg ${SOURCES}
+        src/include/libprg/libprg.h)
 
 target_include_directories(libprg PUBLIC "${CMAKE_CURRENT_LIST_DIR}/src/include")
 
