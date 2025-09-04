@@ -1,19 +1,15 @@
 #ifndef LIBPRG_H
 #define LIBPRG_H
 
-typedef struct libprg {
-    int *elementos;
-    int topo;
-    int capacidade;
-} pilha;
+typedef struct pilha pilha_t;
 
-pilha* criar(int capacidade);
-int adicionar(pilha *p, int e);
-int remover(pilha *p);
-int topo(pilha *p);
-int* listar(pilha *p);
-int tamanho(pilha *p);
-void apagar(pilha *p);
+pilha_t* criar(int capacidade);
+int adicionar(pilha_t *p, int e);
+int remover(pilha_t *p);
+int topo(pilha_t *p);
+int* listar(pilha_t *p);
+int tamanho(pilha_t *p);
+void apagar(pilha_t *p);
 
 
 #endif
