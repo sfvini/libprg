@@ -53,7 +53,7 @@ void enfileirar(fila_t *f, int valor) {
     }
     f->elementos[f->fim] = valor;
     f->tamanho++;
-    f->fim = (f->fim + 1) % f->capcidade
+    f->fim = (f->fim + 1) % f->capcidade;
 }
 
 void desenfileirar(fila_t *f) {
