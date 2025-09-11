@@ -11,7 +11,7 @@ typedef struct fila {
     int tamanho;
 } fila_t;
 
-fila_t* criar_fila(int capacidade) {
+fila_t *criar_fila(int capacidade) {
     fila_t *f = malloc(sizeof(fila_t));
     f->elementos = malloc(sizeof(int) * capacidade);
     f->capacidade = capacidade;
@@ -21,15 +21,15 @@ fila_t* criar_fila(int capacidade) {
     return f;
 }
 
-bool cheia(fila_t* fila) {
+bool cheia(fila_t *fila) {
     return fila->tamanho == fila->capacidade;
 }
 
-bool vazia(fila_t* fila) {
+bool vazia(fila_t *fila) {
     return fila->tamanho == 0;
 }
 
-void enfileirar(fila_t* fila, int valor) {
+void enfileirar(fila_t *fila, int valor) {
     if (cheia(fila)) {
         exit(EXIT_FAILURE);
     }
@@ -38,14 +38,12 @@ void enfileirar(fila_t* fila, int valor) {
     fila->tamanho++;
 }
 
-int desenfileirar(fila_t* fila) {
+void desenfileirar(fila_t *fila) {
     if (vazia(fila)) {
         exit(EXIT_FAILURE);
     }
-    int valor = fila->elementos[fila->inicio];
     fila->inicio = (fila->inicio + 1) % fila->capacidade;
     fila->tamanho--;
-    return valor;
 }
 
 void listar_fila(fila_t *fila) {
@@ -59,3 +57,9 @@ void listar_fila(fila_t *fila) {
     }
     printf("\n");
 }
+
+void apagar_fila(fila_t *f) {
+    free(f->elementos);
+    free(f);
+}
+
