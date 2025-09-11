@@ -40,6 +40,13 @@ int inicio_fila(fila_t *f) {
     return f->elementos[f->inicio];
 }
 
+int fim_fila(fila_t *f) {
+    if (f->fim < 0) {
+        exit(EXIT_FAILURE);
+    }
+    return f->elementos[f->fim];
+}
+
 void enfileirar(fila_t *fila, int valor) {
     if (cheia(fila)) {
         exit(EXIT_FAILURE);
