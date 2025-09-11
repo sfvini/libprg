@@ -34,17 +34,17 @@ int tamanho_fila(fila_t *f) {
 }
 
 int inicio_fila(fila_t *f) {
-    if (f->inicio < 0) {
+    if (vazia(f)) {
         exit(EXIT_FAILURE);
     }
     return f->elementos[f->inicio];
 }
 
 int fim_fila(fila_t *f) {
-    if (f->fim < 0) {
+    if (vazia(f)) {
         exit(EXIT_FAILURE);
     }
-    return f->elementos[f->fim];
+    return f->elementos[(f->fim - 1 + f->capacidade) % f->capacidade];
 }
 
 void enfileirar(fila_t *f, int valor) {
