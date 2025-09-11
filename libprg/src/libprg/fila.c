@@ -21,12 +21,12 @@ fila_t *criar_fila(int capacidade) {
     return f;
 }
 
-bool cheia(fila_t *fila) {
-    return fila->tamanho == fila->capacidade;
+bool cheia(fila_t *f) {
+    return f->tamanho == f->capacidade;
 }
 
-bool vazia(fila_t *fila) {
-    return fila->tamanho == 0;
+bool vazia(fila_t *f) {
+    return f->tamanho == 0;
 }
 
 int tamanho_fila(fila_t *f) {
@@ -47,31 +47,31 @@ int fim_fila(fila_t *f) {
     return f->elementos[f->fim];
 }
 
-void enfileirar(fila_t *fila, int valor) {
-    if (cheia(fila)) {
+void enfileirar(fila_t *f, int valor) {
+    if (cheia(f)) {
         exit(EXIT_FAILURE);
     }
-    fila->elementos[fila->fim] = valor;
-    fila->fim = (fila->fim + 1) % fila->capacidade;
-    fila->tamanho++;
+    f->elementos[f->fim] = valor;
+    f->tamanho++;
+    f->fim = (f->fim + 1) % f->capcidade
 }
 
-void desenfileirar(fila_t *fila) {
-    if (vazia(fila)) {
+void desenfileirar(fila_t *f) {
+    if (vazia(f)) {
         exit(EXIT_FAILURE);
     }
-    fila->inicio = (fila->inicio + 1) % fila->capacidade;
-    fila->tamanho--;
+    f->inicio = (f->inicio + 1) % f->capacidade;
+    f->tamanho--;
 }
 
-void listar_fila(fila_t *fila) {
-    if (vazia(fila)) {
+void listar_fila(fila_t *f) {
+    if (vazia(f)) {
         exit(EXIT_FAILURE);
     }
-    int i = fila->inicio;
-    for (int count = 0; count < fila->tamanho; count++) {
-        printf("%d ", fila->elementos[i]);
-        i = (i + 1) % fila->capacidade;
+    int i = f->inicio;
+    for (int count = 0; count < f->tamanho; count++) {
+        printf("%d ", f->elementos[i]);
+        i = (i + 1) % f->capacidade;
     }
     printf("\n");
 }

@@ -18,11 +18,11 @@ fila_t* criar_fila(int capacidade);
 int tamanho_fila(fila_t *f);
 int inicio_fila(fila_t *f);
 int fim_fila(fila_t *f);
-void enfileirar(fila_t* fila, int valor);
-void desenfileirar(fila_t* fila);
-void listar_fila(fila_t *fila);
+void enfileirar(fila_t* f, int valor);
+void desenfileirar(fila_t* f);
+void listar_fila(fila_t *f);
 void apagar_fila(fila_t *f);
-bool cheia(fila_t* fila);
-bool vazia(fila_t* fila);
+bool cheia(fila_t* f);
+bool vazia(fila_t* f);
 
 #endif
