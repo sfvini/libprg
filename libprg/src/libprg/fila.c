@@ -33,6 +33,13 @@ int tamanho_fila(fila_t *f) {
     return f->tamanho;
 }
 
+int inicio_fila(fila_t *f) {
+    if (f->inicio < 0) {
+        exit(EXIT_FAILURE);
+    }
+    return f->elementos[f->inicio];
+}
+
 void enfileirar(fila_t *fila, int valor) {
     if (cheia(fila)) {
         exit(EXIT_FAILURE);
