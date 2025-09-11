@@ -29,6 +29,10 @@ bool vazia(fila_t *fila) {
     return fila->tamanho == 0;
 }
 
+int tamanho_fila(fila_t *f) {
+    return f->tamanho;
+}
+
 void enfileirar(fila_t *fila, int valor) {
     if (cheia(fila)) {
         exit(EXIT_FAILURE);
