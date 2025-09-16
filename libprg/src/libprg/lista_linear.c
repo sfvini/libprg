@@ -32,3 +32,19 @@ void inserir_lista_linear(lista_linear_t *ll, int valor) {
     ll->elementos[ll->tamanho] = valor;
     ll->tamanho++;
 }
+
+int buscar_lista_linear(lista_linear_t *ll, int valor) {
+    if (!lista_linear_vazia(ll)) {
+        for (int i = 0; i < ll->tamanho; i++) {
+            if (ll->elementos[i] == valor) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+void apagar_lista_linear(lista_linear_t *ll) {
+    free(ll->elementos);
+    free(ll);
+}
