@@ -28,7 +28,11 @@ bool fila_vazia(fila_t* f);
 //LISTA LINEAR
 typedef struct lista_linear lista_linear_t;
 lista_linear_t *criar_lista_linear(int capacidade);
+int buscar_lista_linear(lista_linear_t *ll, int valor);
 void inserir_lista_linear(lista_linear_t *ll, int valor);
+void apagar_lista_linear(lista_linear_t *ll);
+void excluir_lista_linear(lista_linear_t *ll, int valor);
 bool lista_linear_cheia(lista_linear_t *ll);
+bool lista_linear_vazia(lista_linear_t *ll);
 
 #endif
