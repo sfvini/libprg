@@ -10,6 +10,7 @@ set(HEADERS
 set(SOURCES
         "${CMAKE_CURRENT_LIST_DIR}/src/libprg/pilha.c"
         "${CMAKE_CURRENT_LIST_DIR}/src/libprg/fila.c"
+        "${CMAKE_CURRENT_LIST_DIR}/src/libprg/lista_linear.c"
         src/include/libprg/libprg.h
 )
 
