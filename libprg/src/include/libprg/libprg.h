@@ -4,13 +4,13 @@
 
 //PILHA
 typedef struct pilha pilha_t;
-pilha_t* criar(int capacidade);
-int adicionar(pilha_t *p, int e);
-int remover(pilha_t *p);
-int topo(pilha_t *p);
-int* listar(pilha_t *p);
-int tamanho(pilha_t *p);
-void apagar(pilha_t *p);
+pilha_t* criar_pilha(int capacidade);
+int empilhar(pilha_t *p, int valor);
+int desempilhar(pilha_t *p);
+int topo_pilha(pilha_t *p);
+int tamanho_pilha(pilha_t *p);
+void listar_pilha(pilha_t *p);
+void apagar_pilha(pilha_t *p);
 
 //FILA
 typedef struct fila fila_t;
@@ -28,10 +28,12 @@ bool fila_vazia(fila_t* f);
 //LISTA LINEAR
 typedef struct lista_linear lista_linear_t;
 lista_linear_t *criar_lista_linear(int capacidade);
-int buscar_lista_linear(lista_linear_t *ll, int valor);
+int buscar_lista_linear(lista_linear_t *ll, int indice);
+int tamanho_lista_linear(lista_linear_t *ll);
 void inserir_lista_linear(lista_linear_t *ll, int valor);
 void apagar_lista_linear(lista_linear_t *ll);
-void excluir_elemento_lista_linear(lista_linear_t *ll, int valor);
+void excluir_elemento_lista_linear(lista_linear_t *ll);
+void listar_lista_linear(lista_linear_t *ll);
 bool lista_linear_cheia(lista_linear_t *ll);
 bool lista_linear_vazia(lista_linear_t *ll);
 

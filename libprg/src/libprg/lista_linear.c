@@ -32,13 +32,9 @@ void inserir_lista_linear(lista_linear_t *ll, int valor) {
     }
 }
 
-int buscar_lista_linear(lista_linear_t *ll, int valor) {
-    if (!lista_linear_vazia(ll)) {
-        for (int i = 0; i < ll->tamanho; i++) {
-            if (ll->elementos[i] == valor) {
-                return i;
-            }
-        }
+int buscar_lista_linear(lista_linear_t *ll, int indice) {
+    if (!lista_linear_vazia(ll) && indice >= 0 && indice < ll->tamanho) {
+        return ll->elementos[indice];
     }
     return -1;
 }
@@ -56,15 +52,9 @@ int tamanho_lista_linear(lista_linear_t *ll) {
     return ll->tamanho;
 }
 
-void excluir_elemento_lista_linear(lista_linear_t *ll, int valor) {
+void excluir_elemento_lista_linear(lista_linear_t *ll) {
     if (!lista_linear_vazia(ll)) {
-        for (int i = 0; i < ll->tamanho; i++) {
-            if (ll->elementos[i] == valor) {
-                ll->elementos[i] = ll->elementos[ll->tamanho-1];
-                ll->tamanho--;
-                return;
-            }
-        }
+        ll->tamanho--;
     }
 }
 

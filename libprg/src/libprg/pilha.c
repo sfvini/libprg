@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <libprg/libprg.h>
 
 typedef struct pilha {
@@ -7,7 +8,7 @@ typedef struct pilha {
     int capacidade;
 } pilha_t;
 
-pilha_t* criar(int capacidade) {
+pilha_t* criar_pilha(int capacidade) {
     pilha_t *p = malloc(sizeof(pilha_t));
     p->elementos = malloc(sizeof(int) * capacidade);
     p->topo = -1;
@@ -15,48 +16,48 @@ pilha_t* criar(int capacidade) {
     return p;
 }
 
-int adicionar(pilha_t *p, int e) {
+int empilhar(pilha_t *p, int valor) {
     if (p->topo < p->capacidade - 1) {
         p->topo++;
-        p->elementos[p->topo] = e;
+        p->elementos[p->topo] = valor;
         return 1;
-    } else {
-        return 0;
     }
+    return 0;
 }
 
-int remover(pilha_t *p) {
+int desempilhar(pilha_t *p) {
     if (p->topo >= 0) {
-        int elemento = p->elementos[p->topo];
+        int valor = p->elementos[p->topo];
         p->topo--;
-        return elemento;
+        return valor;
     }
-    else {
-        return -1;
-    }
+    return -1;
 }
 
-int topo(pilha_t *p) {
+int topo_pilha(pilha_t *p) {
     if (p->topo >= 0) {
         return p->elementos[p->topo];
-    } else {
-        return -1;
     }
+    return -1;
 }
 
-int* listar(pilha_t *p) {
-    int* cc = malloc(sizeof(int) * (p->topo + 1));
-    for (int i = 0; i <= p->topo; i++) {
-        cc[i] = p->elementos[i];
-    }
-    return cc;
-}
-
-int tamanho(pilha_t *p) {
+int tamanho_pilha(pilha_t *p) {
     return p->topo + 1;
 }
 
-void apagar(pilha_t *p) {
+void listar_pilha(pilha_t *p) {
+    if (p->topo < 0) {
+        printf("A pilha está vazia.\n");
+        return;
+    }
+    printf("Elementos da pilha: ");
+    for (int i = 0; i <= p->topo; i++) {
+        printf("%d ", p->elementos[i]);
+    }
+    printf("\n");
+}
+
+void apagar_pilha(pilha_t *p) {
     free(p->elementos);
     free(p);
 }
