@@ -28,7 +28,6 @@ bool fila_vazia(fila_t* f);
 //LISTA
 typedef struct lista lista_t;
 lista_t *criar_lista(int capacidade, bool ordenada);
-int buscar_lista(lista_t *l, int valor);
 int tamanho_lista(lista_t *l);
 void inserir_lista(lista_t *l, int valor);
 void apagar_lista(lista_t *l);

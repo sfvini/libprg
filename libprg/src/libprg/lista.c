@@ -28,14 +28,12 @@ bool lista_vazia(lista_t *l) {
 }
 
 void inserir_ordenada(lista_t *l, int valor) {
-    for (int i = l->tamanho - 1; i >= 0; i--) {
-        if (l->elementos[i] < valor) {
-            l->elementos[i+1] = valor;
-            break;
-        } else {
-            l->elementos[i+1] = l->elementos[i];
-        }
+    int i = l->tamanho - 1;
+    while (i >= 0 && l->elementos[i] < valor) {
+        l->elementos[i + 1] = l->elementos[i];
+        i--;
     }
+    l->elementos[i + 1] = valor;
     l->tamanho++;
 }
 
@@ -46,22 +44,24 @@ void inserir_nao_ordenada(lista_t *l, int valor) {
 
 void inserir_lista(lista_t *l, int valor) {
     if (lista_cheia(l)) return;
-    l->ordenada ?  inserir_ordenada(l, valor) : inserir_nao_ordenada(l, valor);
+    if (l->ordenada)
+        inserir_ordenada(l, valor);
+    else
+        inserir_nao_ordenada(l, valor);
 }
 
 int busca_binaria(lista_t *l, int valor) {
     int inicio = 0;
-    int fim = l->tamanho -1;
+    int fim = l->tamanho - 1;
 
     while (inicio <= fim) {
         int meio = (inicio + fim) / 2;
 
         if (l->elementos[meio] == valor) return meio;
-        (l->elementos[meio] < valor) ? (inicio = meio + 1) : (fim = meio - 1);
+        (l->elementos[meio] < valor) ? (fim = meio - 1) : (inicio = meio + 1);
     }
     return -1;
 }
-
 
 int busca_linear(lista_t *l, int valor) {
     for (int i = 0; i < l->tamanho; ++i) {
@@ -109,9 +109,11 @@ void remocao_ordenada(lista_t *l, int valor) {
 
 void excluir_item_lista(lista_t *l, int valor) {
     if (lista_vazia(l)) return;
-    l->ordenada ? remocao_ordenada(l, valor) : remocao_nao_ordenada(l, valor);
+    if (l->ordenada)
+        remocao_ordenada(l, valor);
+    else
+        remocao_nao_ordenada(l, valor);
 }
-
 
 void apagar_lista(lista_t *l) {
     free(l->elementos);
