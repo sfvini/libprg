@@ -32,7 +32,7 @@ int buscar_lista(lista_t *l, int valor);
 int tamanho_lista(lista_t *l);
 void inserir_lista(lista_t *l, int valor);
 void apagar_lista(lista_t *l);
-void excluir_elemento_lista(lista_t *l);
+void excluir_item_lista(lista_t *l, int valor);
 void listar_lista(lista_t *l);
 bool lista_linear(lista_t *l);
 bool lista_vazia(lista_t *l);
