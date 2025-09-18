@@ -85,6 +85,14 @@ void listar_lista(lista_t *l) {
     }
 }
 
+int obter_elemento_lista(lista_t *l, int indice) {
+    if (indice < 0 || indice >= l->tamanho) {
+        return -1;
+    }
+    return l->elementos[indice];
+}
+
+
 int tamanho_lista(lista_t *l) {
     return l->tamanho;
 }
