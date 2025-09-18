@@ -25,16 +25,16 @@ void apagar_fila(fila_t *f);
 bool fila_cheia(fila_t* f);
 bool fila_vazia(fila_t* f);
 
-//LISTA LINEAR
-typedef struct lista_linear lista_linear_t;
-lista_linear_t *criar_lista_linear(int capacidade);
-int buscar_lista_linear(lista_linear_t *ll, int indice);
-int tamanho_lista_linear(lista_linear_t *ll);
-void inserir_lista_linear(lista_linear_t *ll, int valor);
-void apagar_lista_linear(lista_linear_t *ll);
-void excluir_elemento_lista_linear(lista_linear_t *ll);
-void listar_lista_linear(lista_linear_t *ll);
-bool lista_linear_cheia(lista_linear_t *ll);
-bool lista_linear_vazia(lista_linear_t *ll);
+//LISTA
+typedef struct lista lista_t;
+lista_t *criar_lista(int capacidade, bool ordenada);
+int buscar_lista(lista_t *l, int valor);
+int tamanho_lista(lista_t *l);
+void inserir_lista(lista_t *l, int valor);
+void apagar_lista(lista_t *l);
+void excluir_elemento_lista(lista_t *l);
+void listar_lista(lista_t *l);
+bool lista_linear(lista_t *l);
+bool lista_vazia(lista_t *l);
 
 #endif
