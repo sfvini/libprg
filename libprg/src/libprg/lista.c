@@ -29,7 +29,7 @@ bool lista_vazia(lista_t *l) {
 
 void inserir_ordenada(lista_t *l, int valor) {
     int i = l->tamanho - 1;
-    while (i >= 0 && l->elementos[i] < valor) {
+    while (i >= 0 && l->elementos[i] > valor) {
         l->elementos[i + 1] = l->elementos[i];
         i--;
     }
@@ -57,8 +57,15 @@ int busca_binaria(lista_t *l, int valor) {
     while (inicio <= fim) {
         int meio = (inicio + fim) / 2;
 
-        if (l->elementos[meio] == valor) return meio;
-        (l->elementos[meio] < valor) ? (fim = meio - 1) : (inicio = meio + 1);
+        if (l->elementos[meio] == valor) {
+            return meio;
+        }
+        else if (l->elementos[meio] < valor) {
+            inicio = meio + 1;
+        }
+        else {
+            fim = meio - 1;
+        }
     }
     return -1;
 }

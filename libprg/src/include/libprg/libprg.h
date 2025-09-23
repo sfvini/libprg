@@ -30,6 +30,7 @@ typedef struct lista lista_t;
 lista_t *criar_lista(int capacidade, bool ordenada);
 int tamanho_lista(lista_t *l);
 int obter_elemento_lista(lista_t *l, int indice);
+int buscar_lista(lista_t *l, int valor);
 void inserir_lista(lista_t *l, int valor);
 void apagar_lista(lista_t *l);
 void excluir_item_lista(lista_t *l, int valor);
