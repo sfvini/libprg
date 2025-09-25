@@ -35,7 +35,10 @@ void inserir_lista(lista_t *l, int valor);
 void apagar_lista(lista_t *l);
 void excluir_item_lista(lista_t *l, int valor);
 void listar_lista(lista_t *l);
-bool lista_linear(lista_t *l);
-bool lista_vazia(lista_t *l);
+
+//LISTA ENCADEADA
+typedef struct no no_t;
+no_t* criar_lista_encadeada(int valor);
+no_t* adicionar_lista_encadeada(no_t* inicio, int valor);
 
 #endif

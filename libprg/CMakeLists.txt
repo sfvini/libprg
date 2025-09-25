@@ -12,10 +12,12 @@ set(SOURCES
         "${CMAKE_CURRENT_LIST_DIR}/src/libprg/fila.c"
         "${CMAKE_CURRENT_LIST_DIR}/src/libprg/lista.c"
         src/include/libprg/libprg.h
+        src/libprg/lista_encadeada.c
 )
 
 add_library(libprg ${SOURCES}
-        src/include/libprg/libprg.h)
+        src/include/libprg/libprg.h
+        src/libprg/lista_encadeada.c)
 
 target_include_directories(libprg PUBLIC "${CMAKE_CURRENT_LIST_DIR}/src/include")
 
