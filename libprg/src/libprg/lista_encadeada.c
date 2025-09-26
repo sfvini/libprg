@@ -15,7 +15,7 @@ no_t* criar_lista_encadeada(int valor) {
     return no;
 }
 
-no_t* adicionar_lista_encadeada(no_t** inicio, int valor) {
+no_t* adicionar_lista_encadeada(no_t* inicio, int valor) {
     no_t* novo_no = criar_lista_encadeada(valor);
     novo_no->proximo = &inicio;
     inicio = novo_no;
