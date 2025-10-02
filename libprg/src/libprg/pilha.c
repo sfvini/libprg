@@ -57,7 +57,7 @@ void listar_pilha(pilha_t *p) {
     printf("\n");
 }
 
-void apagar_pilha(pilha_t *p) {
+void destruir_pilha(pilha_t *p) {
     free(p->elementos);
     free(p);
 }

@@ -40,7 +40,7 @@ int inicio_fila(fila_t *f) {
     return f->elementos[f->inicio];
 }
 
-int fim_fila(fila_t *f) {
+int topo_fila(fila_t *f) {
     if (fila_vazia(f)) {
         return -1;
     }
@@ -76,7 +76,7 @@ void listar_fila(fila_t *f) {
     printf("\n");
 }
 
-void apagar_fila(fila_t *f) {
+void destruir_fila(fila_t *f) {
     free(f->elementos);
     free(f);
 }

@@ -12,11 +12,10 @@ no_t* criar_lista_encadeada(int valor) {
     no_t* no = malloc(sizeof(no_t));
     no->valor = valor;
     no->proximo = NULL;
-
     return no;
 }
 
-void adicionar_lista_encadeada(no_t** inicio, int valor) {
+void inserir_lista_encadeada(no_t** inicio, int valor) {
     no_t* novo_no = criar_lista_encadeada(valor);
     novo_no->proximo = *inicio;
     *inicio = novo_no;
@@ -32,7 +31,7 @@ no_t* criar_lista_encadeada_circular(int valor) {
     return no;
 }
 
-void adicionar_lista_encadeada_circular(no_t** inicio, int valor) {
+void inserir_lista_encadeada_circular(no_t** inicio, int valor) {
     no_t* novo_no = criar_lista_encadeada_circular(valor);
     novo_no->proximo = *inicio;
 
@@ -50,16 +49,14 @@ void adicionar_lista_encadeada_circular(no_t** inicio, int valor) {
 //--------------------------------------
 no_t* buscar_lista_encadeada(no_t** inicio, int valor) {
     no_t* atual = *inicio;
-
     while (atual) {
         if (atual->valor == valor) return atual;
         atual = atual->proximo;
     }
-
     return NULL;
 }
 
-void remover_lista_encadeada(no_t** inicio, int valor) {
+void excluir_item_lista_encadeada(no_t** inicio, int valor) {
     no_t* atual = *inicio;
     no_t* anterior = NULL;
 

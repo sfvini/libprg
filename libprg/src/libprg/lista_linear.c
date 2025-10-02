@@ -28,6 +28,31 @@ bool lista_linear_vazia(lista_linear_t *ll) {
 }
 
 //------------------------------------------------
+void inserir_ordenada(lista_linear_t *ll, int valor) {
+    int i = ll->tamanho - 1;
+    while (i >= 0 && ll->elementos[i] > valor) {
+        ll->elementos[i + 1] = ll->elementos[i];
+        i--;
+    }
+    ll->elementos[i + 1] = valor;
+    ll->tamanho++;
+}
+
+void inserir_nao_ordenada(lista_linear_t *ll, int valor) {
+    ll->elementos[ll->tamanho] = valor;
+    ll->tamanho++;
+}
+
+void inserir_lista_linear(lista_linear_t *ll, int valor) {
+    if (lista_linear_cheia(ll)) return;
+    if (ll->ordenada)
+        inserir_ordenada(ll, valor);
+    else
+        inserir_nao_ordenada(ll, valor);
+}
+//------------------------------------------------
+
+//------------------------------------------------
 int busca_binaria(lista_linear_t *ll, int valor) {
     int inicio = 0;
     int fim = ll->tamanho - 1;
@@ -55,61 +80,16 @@ int busca_linear(lista_linear_t *ll, int valor) {
     return -1;
 }
 
-int busca_lista_linear(lista_linear_t *ll, int valor) {
+int buscar_lista_linear(lista_linear_t *ll, int valor) {
     if (lista_linear_vazia(ll)) return -1;
     if (ll->ordenada) return busca_binaria(ll, valor);
     return busca_linear(ll, valor);
 }
 //------------------------------------------------
 
-int obter_elemento_lista_linear(lista_linear_t *ll, int indice) {
-    if (indice < 0 || indice >= ll->tamanho) {
-        return -1;
-    }
-    return ll->elementos[indice];
-}
-
-int tamanho_lista_linear(lista_linear_t *ll) {
-    return ll->tamanho;
-}
-
-//------------------------------------------------
-void inserir_ordenada(lista_linear_t *ll, int valor) {
-    int i = ll->tamanho - 1;
-    while (i >= 0 && ll->elementos[i] > valor) {
-        ll->elementos[i + 1] = ll->elementos[i];
-        i--;
-    }
-    ll->elementos[i + 1] = valor;
-    ll->tamanho++;
-}
-
-void inserir_nao_ordenada(lista_linear_t *ll, int valor) {
-    ll->elementos[ll->tamanho] = valor;
-    ll->tamanho++;
-}
-
-void inserir_lista_linear(lista_linear_t *ll, int valor) {
-    if (lista_linear_cheia(ll)) return;
-    if (ll->ordenada)
-        inserir_ordenada(ll, valor);
-    else
-        inserir_nao_ordenada(ll, valor);
-}
-//------------------------------------------------
-
-void listar_lista_linear(lista_linear_t *ll) {
-    if (!lista_linear_vazia(ll)) {
-        for (int i = 0; i < ll->tamanho; i++) {
-            printf("%d ", ll->elementos[i]);
-        }
-        printf("\n");
-    }
-}
-
 //------------------------------------------------
 void excluir_item_nao_ordenada(lista_linear_t *ll, int valor) {
-    int pos = busca_lista_linear(ll, valor);
+    int pos = buscar_lista_linear(ll, valor);
     if (pos == -1) return;
 
     ll->elementos[pos] = ll->elementos[ll->tamanho - 1];
@@ -117,7 +97,7 @@ void excluir_item_nao_ordenada(lista_linear_t *ll, int valor) {
 }
 
 void excluir_item_ordenada(lista_linear_t *ll, int valor) {
-    int pos = busca_lista_linear(ll, valor);
+    int pos = buscar_lista_linear(ll, valor);
     if (pos == -1) return;
 
     for (int i = pos; i < ll->tamanho - 1; i++) {
@@ -135,7 +115,27 @@ void excluir_item_lista_linear(lista_linear_t *ll, int valor) {
 }
 //------------------------------------------------
 
-void apagar_lista_linear(lista_linear_t *ll) {
+int obter_elemento_lista_linear(lista_linear_t *ll, int indice) {
+    if (indice < 0 || indice >= ll->tamanho) {
+        return -1;
+    }
+    return ll->elementos[indice];
+}
+
+int tamanho_lista_linear(lista_linear_t *ll) {
+    return ll->tamanho;
+}
+
+void listar_lista_linear(lista_linear_t *ll) {
+    if (!lista_linear_vazia(ll)) {
+        for (int i = 0; i < ll->tamanho; i++) {
+            printf("%d ", ll->elementos[i]);
+        }
+        printf("\n");
+    }
+}
+
+void destruir_lista_linear(lista_linear_t *ll) {
     free(ll->elementos);
     free(ll);
 }
