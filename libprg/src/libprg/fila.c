@@ -35,14 +35,14 @@ int tamanho_fila(fila_t *f) {
 
 int inicio_fila(fila_t *f) {
     if (fila_vazia(f)) {
-        exit(EXIT_FAILURE);
+        return -1;
     }
     return f->elementos[f->inicio];
 }
 
 int fim_fila(fila_t *f) {
     if (fila_vazia(f)) {
-        exit(EXIT_FAILURE);
+        return -1;
     }
     return f->elementos[(f->fim - 1 + f->capacidade) % f->capacidade];
 }
