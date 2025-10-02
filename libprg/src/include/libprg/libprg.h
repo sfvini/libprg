@@ -32,6 +32,7 @@ typedef struct lista_linear lista_linear_t;
 lista_linear_t *criar_lista_linear(int capacidade, bool ordenada);
 int tamanho_lista_linear(lista_linear_t *l);
 int obter_elemento_lista_linear(lista_linear_t *l, int indice);
+int buscar_lista_linear(lista_linear_t *l, int valor);
 void inserir_lista_linear(lista_linear_t *l, int valor);
 void destruir_lista_linear(lista_linear_t *l);
 void excluir_item_lista_linear(lista_linear_t *l, int valor);
