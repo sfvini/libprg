@@ -40,9 +40,11 @@ void listar_lista(lista_t *l);
 typedef struct no no_t;
 no_t* criar_lista_encadeada(int valor);
 void adicionar_lista_encadeada(no_t** inicio, int valor);
-void remover(no_t** inicio, int valor);
+void remover_lista_encadeada(no_t** inicio, int valor);
 no_t* buscar_lista_encadeada(no_t** inicio, int valor);
 no_t* criar_lista_encadeada_circular(int valor);
 void adicionar_lista_encadeada_circular(no_t** inicio, int valor);
+void destruir_lista_encadeada(no_t** inicio);
+void destruir_lista_encadeada_circular(no_t** inicio);
 
 #endif
