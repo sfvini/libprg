@@ -43,11 +43,15 @@ typedef struct no no_t;
 
 no_t* criar_lista_encadeada(int valor);
 void inserir_lista_encadeada(no_t** inicio, int valor);
+void listar_lista_encadeada(no_t* inicio);
 
 no_t* criar_lista_encadeada_circular(int valor);
 void inserir_lista_encadeada_circular(no_t** inicio, int valor);
+void listar_lista_encadeada_circular(no_t* inicio);
 
 no_t* buscar_lista_encadeada(no_t** inicio, int valor);
+int inicio_lista_encadeada(no_t* inicio);
+int tamanho_lista_encadeada(no_t* inicio);
 void excluir_item_lista_encadeada(no_t** inicio, int valor);
 void destruir_lista_encadeada(no_t** inicio);
 

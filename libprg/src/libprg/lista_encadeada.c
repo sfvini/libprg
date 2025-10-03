@@ -20,6 +20,15 @@ void inserir_lista_encadeada(no_t** inicio, int valor) {
     novo_no->proximo = *inicio;
     *inicio = novo_no;
 }
+
+void listar_lista_encadeada(no_t* inicio) {
+    no_t* atual = inicio;
+    while (atual) {
+        printf("%d ", atual->valor);
+        atual = atual->proximo;
+    }
+    printf("\n");
+}
 //--------------------------------------
 
 //--------------------------------------
@@ -44,6 +53,16 @@ void inserir_lista_encadeada_circular(no_t** inicio, int valor) {
     ultimo->proximo = novo_no;
     *inicio = novo_no;
 }
+
+void listar_lista_encadeada_circular(no_t* inicio) {
+    if (!inicio) return;
+    no_t* atual = inicio;
+    do {
+        printf("%d ", atual->valor);
+        atual = atual->proximo;
+    } while (atual != inicio);
+    printf("\n");
+}
 //--------------------------------------
 
 //--------------------------------------
@@ -54,6 +73,21 @@ no_t* buscar_lista_encadeada(no_t** inicio, int valor) {
         atual = atual->proximo;
     }
     return NULL;
+}
+
+int inicio_lista_encadeada(no_t* inicio) {
+    if (inicio) return inicio->valor;
+    return -1;
+}
+
+int tamanho_lista_encadeada(no_t* inicio) {
+    int i = 0;
+    no_t* atual = inicio;
+    while (atual) {
+        i++;
+        atual = atual->proximo;
+    }
+    return i;
 }
 
 void excluir_item_lista_encadeada(no_t** inicio, int valor) {
