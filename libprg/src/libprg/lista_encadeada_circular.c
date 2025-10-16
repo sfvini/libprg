@@ -45,6 +45,6 @@ void excluir_item_lista_encadeada_dupla(no_duplo_t** inicio, int valor) {
             free(atual);
             break;
         }
-atual = atual->proximo;
+      atual = atual->proximo;
     }
 }
