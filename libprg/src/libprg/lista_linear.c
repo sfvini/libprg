@@ -87,7 +87,6 @@ int buscar_lista_linear(lista_linear_t *ll, int valor) {
     return busca_linear(ll, valor);
 }
 
-// Exclusão
 void excluir_item_ordenada(lista_linear_t *ll, int valor) {
     int pos = buscar_lista_linear(ll, valor);
     if (pos == -1) return;
