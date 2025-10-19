@@ -12,14 +12,7 @@ typedef struct lista_linear {
 
 lista_linear_t *criar_lista_linear(int capacidade, bool ordenada) {
     lista_linear_t *ll = malloc(sizeof(lista_linear_t));
-    if (!ll) return NULL;
-
     ll->elementos = malloc(sizeof(int) * capacidade);
-    if (!ll->elementos) {
-        free(ll);
-        return NULL;
-    }
-
     ll->capacidade = capacidade;
     ll->tamanho = 0;
     ll->ordenada = ordenada;
