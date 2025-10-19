@@ -116,7 +116,6 @@ void excluir_item_lista_linear(lista_linear_t *ll, int valor) {
 
 int obter_elemento_lista_linear(lista_linear_t *ll, int indice) {
     if (!ll || indice < 0 || indice >= ll->tamanho) {
-        fprintf(stderr, "Indice invalido!\n");
         exit(EXIT_FAILURE);
     }
     return ll->elementos[indice];
