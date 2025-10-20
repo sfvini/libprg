@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-//PILHA
+// PILHA
 typedef struct pilha pilha_t;
 
 pilha_t* criar_pilha(int capacidade);
@@ -13,8 +13,11 @@ int topo_pilha(pilha_t *p);
 int tamanho_pilha(pilha_t *p);
 void listar_pilha(pilha_t *p);
 void destruir_pilha(pilha_t *p);
+void limpar_pilha(pilha_t *p);
+void inverter_pilha(pilha_t *p);
+void imprimir_topo(pilha_t *p);
 
-//FILA
+// FILA
 typedef struct fila fila_t;
 
 fila_t* criar_fila(int capacidade);
@@ -25,8 +28,11 @@ void enfileirar(fila_t* f, int valor);
 void desenfileirar(fila_t* f);
 void listar_fila(fila_t *f);
 void destruir_fila(fila_t *f);
+void limpar_fila(fila_t *f);
+int buscar_fila(fila_t *f, int valor);
+void inverter_fila(fila_t *f);
 
-//LISTA LINEAR
+// LISTA LINEAR
 typedef struct lista_linear lista_linear_t;
 
 lista_linear_t *criar_lista_linear(int capacidade, bool ordenada);
@@ -39,8 +45,10 @@ void inserir_lista_linear(lista_linear_t *l, int valor);
 void destruir_lista_linear(lista_linear_t *l);
 void excluir_item_lista_linear(lista_linear_t *l, int valor);
 void listar_lista_linear(lista_linear_t *l);
+void inverter_lista_linear(lista_linear_t *l);
+void limpar_lista_linear(lista_linear_t *l);
 
-//LISTA ENCADEADA
+// LISTA ENCADEADA
 typedef struct no no_t;
 
 no_t* criar_lista_encadeada(int valor);
@@ -57,12 +65,11 @@ int tamanho_lista_encadeada(no_t* inicio);
 void excluir_item_lista_encadeada(no_t** inicio, int valor);
 void destruir_lista_encadeada(no_t** inicio);
 
-//LISTA ENCADEADA DUPLA
+// LISTA ENCADEADA DUPLA
 typedef struct no_duplo no_duplo_t;
 
 no_duplo_t* criar_lista_encadeada_dupla(int valor);
 no_duplo_t* buscar_lista_encadeada_dupla(no_duplo_t** inicio, int valor);
-
 void adicionar_lista_encadeada_dupla(no_duplo_t** inicio, int valor);
 void excluir_item_lista_encadeada_dupla(no_duplo_t** inicio, int valor);
 

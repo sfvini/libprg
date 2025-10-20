@@ -81,3 +81,29 @@ void destruir_fila(fila_t *f) {
     free(f);
 }
 
+void limpar_fila(fila_t *f) {
+    f->inicio = 0;
+    f->fim = 0;
+    f->tamanho = 0;
+}
+
+int buscar_fila(fila_t *f, int valor) {
+    int i = f->inicio;
+    for (int count = 0; count < f->tamanho; count++) {
+        if (f->elementos[i] == valor) {
+            return count;
+        }
+        i = (i + 1) % f->capacidade;
+    }
+    return -1;
+}
+
+void inverter_fila(fila_t *f) {
+    for (int i = 0; i < f->tamanho / 2; i++) {
+        int idx1 = (f->inicio + i) % f->capacidade;
+        int idx2 = (f->inicio + f->tamanho - 1 - i) % f->capacidade;
+        int temp = f->elementos[idx1];
+        f->elementos[idx1] = f->elementos[idx2];
+        f->elementos[idx2] = temp;
+    }
+}

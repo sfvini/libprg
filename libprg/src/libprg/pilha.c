@@ -61,3 +61,19 @@ void destruir_pilha(pilha_t *p) {
     free(p->elementos);
     free(p);
 }
+
+void limpar_pilha(pilha_t *p) {
+    p->topo = -1;
+}
+
+void inverter_pilha(pilha_t *p) {
+    for (int i = 0, j = p->topo; i < j; i++, j--) {
+        int temp = p->elementos[i];
+        p->elementos[i] = p->elementos[j];
+        p->elementos[j] = temp;
+    }
+}
+
+void imprimir_topo(pilha_t *p) {
+    if (p->topo >= 0) printf("Topo: %d\n", p->elementos[p->topo]);
+}

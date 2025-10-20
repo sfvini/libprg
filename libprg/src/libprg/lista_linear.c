@@ -140,3 +140,17 @@ void destruir_lista_linear(lista_linear_t *ll) {
     free(ll->elementos);
     free(ll);
 }
+
+void inverter_lista_linear(lista_linear_t *ll) {
+    if (!ll || lista_linear_vazia(ll)) return;
+    for (int i = 0, j = ll->tamanho - 1; i < j; i++, j--) {
+        int temp = ll->elementos[i];
+        ll->elementos[i] = ll->elementos[j];
+        ll->elementos[j] = temp;
+    }
+}
+
+void limpar_lista_linear(lista_linear_t *ll) {
+    if (!ll) return;
+    ll->tamanho = 0;
+}
