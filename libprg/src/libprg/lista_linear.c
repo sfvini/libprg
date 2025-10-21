@@ -13,10 +13,12 @@ lista_linear_t *criar_lista_linear(int capacidade, bool ordenada);
 
 bool lista_linear_cheia(const lista_linear_t *ll);
 bool lista_linear_vazia(const lista_linear_t *ll);
+int tamanho_lista_linear(const lista_linear_t *ll);
 
 int busca_binaria(const lista_linear_t *ll, int valor);
 int busca_linear(const lista_linear_t *ll, int valor);
 int buscar_lista_linear(const lista_linear_t *ll, int valor);
+int buscar_por_indice_lista_linear(const lista_linear_t *ll, int indice);
 void listar_lista_linear(const lista_linear_t *ll);
 
 void inserir_ordenada(lista_linear_t *ll, int valor);
@@ -47,13 +49,17 @@ lista_linear_t *criar_lista_linear(int capacidade, bool ordenada) {
     return ll;
 }
 
-// ======== FUNÇÕES BOOLEANAS ========
+// ======== UTILIDADES ========
 bool lista_linear_cheia(const lista_linear_t *ll) {
     return ll && ll->tamanho >= ll->capacidade;
 }
 
 bool lista_linear_vazia(const lista_linear_t *ll) {
     return !ll || ll->tamanho == 0;
+}
+
+int tamanho_lista_linear(const lista_linear_t *ll) {
+    return ll->tamanho;
 }
 
 // ========  BUSCA E LISTAGEM ========
@@ -83,6 +89,10 @@ int buscar_lista_linear(const lista_linear_t *ll, int valor) {
     if (ll->ordenada)
         return busca_binaria(ll, valor);
     return busca_linear(ll, valor);
+}
+
+int buscar_por_indice_lista_linear(const lista_linear_t *ll, int indice) {
+    return ll->elementos[indice];
 }
 
 void listar_lista_linear(const lista_linear_t *ll) {
