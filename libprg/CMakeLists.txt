@@ -12,7 +12,7 @@ set(SOURCES
         "${CMAKE_CURRENT_LIST_DIR}/src/libprg/fila.c"
         "${CMAKE_CURRENT_LIST_DIR}/src/libprg/lista_linear.c"
         "${CMAKE_CURRENT_LIST_DIR}/src/libprg/lista_encadeada.c"
-        "${CMAKE_CURRENT_LIST_DIR}/src/libprg/lista_encadeada_circular.c"
+        "${CMAKE_CURRENT_LIST_DIR}/src/libprg/lista_encadeada_dupla.c"
 
 )
 

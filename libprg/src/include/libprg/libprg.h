@@ -36,34 +36,44 @@ void inverter_fila(fila_t *f);
 typedef struct lista_linear lista_linear_t;
 
 lista_linear_t *criar_lista_linear(int capacidade, bool ordenada);
-lista_linear_t *eliminar_duplicatas(int capacidade, lista_linear_t *ll);
-int tamanho_lista_linear(lista_linear_t *l);
-int obter_elemento_lista_linear(lista_linear_t *l, int indice);
-int buscar_lista_linear(lista_linear_t *l, int valor);
-int busca_binaria(lista_linear_t *ll, int valor);
-int busca_linear(lista_linear_t *ll, int valor);
-void inserir_lista_linear(lista_linear_t *l, int valor);
-void destruir_lista_linear(lista_linear_t *l);
-void excluir_item_lista_linear(lista_linear_t *l, int valor);
-void listar_lista_linear(lista_linear_t *l);
-void inverter_lista_linear(lista_linear_t *l);
-void limpar_lista_linear(lista_linear_t *l);
+bool lista_linear_cheia(const lista_linear_t *ll);
+bool lista_linear_vazia(const lista_linear_t *ll);
+int busca_binaria(const lista_linear_t *ll, int valor);
+int busca_linear(const lista_linear_t *ll, int valor);
+int buscar_lista_linear(const lista_linear_t *ll, int valor);
+void listar_lista_linear(const lista_linear_t *ll);
+void inserir_ordenada(lista_linear_t *ll, int valor);
+void inserir_nao_ordenada(lista_linear_t *ll, int valor);
+void inserir_lista_linear(lista_linear_t *ll, int valor);
+void inserir_em_indice_lista_linear(lista_linear_t *ll, int indice, int valor);
+void excluir_item_ordenada(lista_linear_t *ll, int valor);
+void excluir_item_nao_ordenada(lista_linear_t *ll, int valor);
+void excluir_item_lista_linear(lista_linear_t *ll, int valor);
+void excluir_em_indice_lista_linear(lista_linear_t *ll, int indice);
+void excluir_duplicatas_lista_linear(lista_linear_t *ll);
+void substituir_em_indice_lista_linear(lista_linear_t *ll, int indice, int valor);
+void inverter_lista_linear(lista_linear_t *ll);
+void limpar_lista_linear(lista_linear_t *ll);
+void destruir_lista_linear(lista_linear_t *ll);
 
 // LISTA ENCADEADA
 typedef struct no no_t;
 
 no_t* criar_lista_encadeada(int valor);
-void inserir_lista_encadeada(no_t** inicio, int valor);
-void listar_lista_encadeada(no_t* inicio);
-
 no_t* criar_lista_encadeada_circular(int valor);
+void inserir_lista_encadeada(no_t** inicio, int valor);
 void inserir_lista_encadeada_circular(no_t** inicio, int valor);
+void listar_lista_encadeada(no_t* inicio);
 void listar_lista_encadeada_circular(no_t* inicio);
-
 no_t* buscar_lista_encadeada(no_t** inicio, int valor);
-int inicio_lista_encadeada(no_t* inicio);
+int buscar_por_indice_lista_encadeada(no_t* inicio, int indice);
+bool lista_encadeada_vazia(no_t* inicio);
 int tamanho_lista_encadeada(no_t* inicio);
+void substituir_em_indice_lista_encadeada(no_t* inicio, int indice, int valor);
+void inverter_lista_encadeada(no_t** inicio);
 void excluir_item_lista_encadeada(no_t** inicio, int valor);
+void excluir_em_indice_lista_encadeada(no_t** inicio, int indice);
+void limpar_lista_encadeada(no_t** inicio);
 void destruir_lista_encadeada(no_t** inicio);
 
 // LISTA ENCADEADA DUPLA
