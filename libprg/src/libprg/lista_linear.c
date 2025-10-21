@@ -19,6 +19,17 @@ lista_linear_t *criar_lista_linear(int capacidade, bool ordenada) {
     return ll;
 }
 
+lista_linear_t *eliminar_duplicatas(int capacidade, lista_linear_t *ll) {
+    lista_linear_t *nova_lista = malloc(sizeof(lista_linear_t));
+    for (int i = 0; i < capacidade; i++) {
+        if (buscar_lista_linear(nova_lista, obter_elemento_lista_linear(ll, i)) == -1) {
+            inserir_lista_linear(nova_lista, obter_elemento_lista_linear(ll, i));
+        }
+    }
+    return nova_lista;
+}
+
+
 bool lista_linear_cheia(lista_linear_t *ll) {
     return ll->tamanho >= ll->capacidade;
 }
@@ -27,6 +38,7 @@ bool lista_linear_vazia(lista_linear_t *ll) {
     return ll->tamanho == 0;
 }
 
+//--------------------------------------
 void inserir_ordenada(lista_linear_t *ll, int valor) {
     if (lista_linear_cheia(ll)) return;
 
@@ -49,12 +61,19 @@ void inserir_nao_ordenada(lista_linear_t *ll, int valor) {
 void inserir_lista_linear(lista_linear_t *ll, int valor) {
     if (!ll) return;
 
+    if (lista_linear_cheia(ll)) {
+        ll->elementos = realloc(ll->elementos, sizeof(int)*ll->capacidade*2);
+        ll->capacidade *=2;
+    }
+
     if (ll->ordenada)
         inserir_ordenada(ll, valor);
     else
         inserir_nao_ordenada(ll, valor);
 }
+//--------------------------------------
 
+//--------------------------------------
 int busca_binaria(lista_linear_t *ll, int valor) {
     int inicio = 0;
     int fim = ll->tamanho - 1;
@@ -86,7 +105,9 @@ int buscar_lista_linear(lista_linear_t *ll, int valor) {
         return busca_binaria(ll, valor);
     return busca_linear(ll, valor);
 }
+//--------------------------------------
 
+//--------------------------------------
 void excluir_item_ordenada(lista_linear_t *ll, int valor) {
     int pos = buscar_lista_linear(ll, valor);
     if (pos == -1) return;
@@ -113,10 +134,11 @@ void excluir_item_lista_linear(lista_linear_t *ll, int valor) {
     else
         excluir_item_nao_ordenada(ll, valor);
 }
+//--------------------------------------
 
 int obter_elemento_lista_linear(lista_linear_t *ll, int indice) {
     if (!ll || indice < 0 || indice >= ll->tamanho) {
-        exit(EXIT_FAILURE);
+        return -1;
     }
     return ll->elementos[indice];
 }
@@ -154,3 +176,12 @@ void limpar_lista_linear(lista_linear_t *ll) {
     if (!ll) return;
     ll->tamanho = 0;
 }
+
+int buscar_na_posicao_lista_linear(lista_linear_t *ll, int indice) {
+    return ll->elementos[indice];
+}
+
+void inserir_na_posicao_lista_linear(lista_linear_t *ll, int indice, int valor) {
+        inserir_lista_linear(ll, ll->elementos[indice]);
+        ll->elementos[indice] = valor;
+    }

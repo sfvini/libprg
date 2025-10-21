@@ -36,6 +36,7 @@ void inverter_fila(fila_t *f);
 typedef struct lista_linear lista_linear_t;
 
 lista_linear_t *criar_lista_linear(int capacidade, bool ordenada);
+lista_linear_t *eliminar_duplicatas(int capacidade, lista_linear_t *ll);
 int tamanho_lista_linear(lista_linear_t *l);
 int obter_elemento_lista_linear(lista_linear_t *l, int indice);
 int buscar_lista_linear(lista_linear_t *l, int valor);
