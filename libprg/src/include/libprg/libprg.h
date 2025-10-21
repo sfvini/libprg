@@ -80,8 +80,16 @@ void destruir_lista_encadeada(no_t** inicio);
 typedef struct no_duplo no_duplo_t;
 
 no_duplo_t* criar_lista_encadeada_dupla(int valor);
-no_duplo_t* buscar_lista_encadeada_dupla(no_duplo_t** inicio, int valor);
-void adicionar_lista_encadeada_dupla(no_duplo_t** inicio, int valor);
+void inserir_lista_encadeada_dupla(no_duplo_t** inicio, int valor);
+no_duplo_t* buscar_lista_encadeada_dupla(no_duplo_t* inicio, int valor);
+int buscar_por_indice_lista_encadeada_dupla(no_duplo_t* inicio, int indice);
+void listar_lista_encadeada_dupla(no_duplo_t* inicio);
+void substituir_em_indice_lista_encadeada_dupla(no_duplo_t* inicio, int indice, int valor);
+void inverter_lista_encadeada_dupla(no_duplo_t** inicio);
+int tamanho_lista_encadeada_dupla(no_duplo_t* inicio);
+bool lista_encadeada_dupla_vazia(no_duplo_t* inicio);
 void excluir_item_lista_encadeada_dupla(no_duplo_t** inicio, int valor);
+void excluir_em_indice_lista_encadeada_dupla(no_duplo_t** inicio, int indice);
+void destruir_lista_encadeada_dupla(no_duplo_t** inicio);
 
 #endif

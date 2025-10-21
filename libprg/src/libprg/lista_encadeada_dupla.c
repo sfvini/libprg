@@ -19,7 +19,7 @@ void listar_lista_encadeada_dupla(no_duplo_t* inicio);
 void substituir_em_indice_lista_encadeada_dupla(no_duplo_t* inicio, int indice, int valor);
 void inverter_lista_encadeada_dupla(no_duplo_t** inicio);
 
-int tamanho_lista_encadeada_dupla(no_duplo_t* inicio;
+int tamanho_lista_encadeada_dupla(no_duplo_t* inicio);
 bool lista_encadeada_dupla_vazia(no_duplo_t* inicio);
 
 void excluir_item_lista_encadeada_dupla(no_duplo_t** inicio, int valor);
