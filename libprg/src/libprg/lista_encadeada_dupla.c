@@ -11,6 +11,7 @@ typedef struct no_duplo {
 no_duplo_t* criar_lista_encadeada_dupla(int valor);
 
 void inserir_lista_encadeada_dupla(no_duplo_t** inicio, int valor);
+void inserir_em_indice_lista_encadeada_dupla(no_duplo_t** inicio, int indice, int valor);
 
 no_duplo_t* buscar_lista_encadeada_dupla(no_duplo_t* inicio, int valor);
 int buscar_por_indice_lista_encadeada_dupla(no_duplo_t* inicio, int indice);
@@ -46,6 +47,33 @@ void inserir_lista_encadeada_dupla(no_duplo_t** inicio, int valor) {
     novo_no->proximo = *inicio;
     (*inicio)->anterior = novo_no;
     *inicio = novo_no;
+}
+
+void inserir_em_indice_lista_encadeada_dupla(no_duplo_t** inicio, int indice, int valor) {
+    no_duplo_t* novo_no = criar_lista_encadeada_dupla(valor);
+
+    if (!*inicio || indice <= 0) {
+        novo_no->proximo = *inicio;
+        if (*inicio) (*inicio)->anterior = novo_no;
+        *inicio = novo_no;
+        return;
+    }
+
+    no_duplo_t* atual = *inicio;
+    int i = 0;
+
+    while (atual->proximo && i < indice - 1) {
+        atual = atual->proximo;
+        i++;
+    }
+
+    novo_no->proximo = atual->proximo;
+    novo_no->anterior = atual;
+
+    if (atual->proximo) {
+        atual->proximo->anterior = novo_no;
+    }
+    atual->proximo = novo_no;
 }
 
 // ======== BUSCA E LISTAGEM ========
@@ -172,3 +200,4 @@ void destruir_lista_encadeada_dupla(no_duplo_t** inicio) {
     }
     *inicio = NULL;
 }
+

@@ -12,6 +12,8 @@ no_t* criar_lista_encadeada_circular(int valor);
 
 void inserir_lista_encadeada(no_t** inicio, int valor);
 void inserir_lista_encadeada_circular(no_t** inicio, int valor);
+void inserir_em_indice_lista_encadeada(no_t** inicio, int indice, int valor);
+void inserir_em_indice_lista_encadeada_circular(no_t** inicio, int indice, int valor);
 
 void listar_lista_encadeada(no_t* inicio);
 void listar_lista_encadeada_circular(no_t* inicio);
@@ -30,7 +32,6 @@ void excluir_em_indice_lista_encadeada(no_t** inicio, int indice);
 
 void limpar_lista_encadeada(no_t** inicio);
 void destruir_lista_encadeada(no_t** inicio);
-
 
 // ======== CRIAÇÃO ========
 no_t* criar_lista_encadeada(int valor) {
@@ -67,6 +68,59 @@ void inserir_lista_encadeada_circular(no_t** inicio, int valor) {
     novo_no->proximo = *inicio;
     ultimo->proximo = novo_no;
     *inicio = novo_no;
+}
+
+void inserir_em_indice_lista_encadeada(no_t** inicio, int indice, int valor) {
+    no_t* novo_no = criar_lista_encadeada(valor);
+    if (!*inicio || indice <= 0) {
+        novo_no->proximo = *inicio;
+        *inicio = novo_no;
+        return;
+    }
+    no_t* atual = *inicio;
+    no_t* anterior = NULL;
+    int i = 0;
+    while (atual && i < indice) {
+        anterior = atual;
+        atual = atual->proximo;
+        i++;
+    }
+    anterior->proximo = novo_no;
+    novo_no->proximo = atual;
+}
+
+void inserir_em_indice_lista_encadeada_circular(no_t** inicio, int indice, int valor) {
+    no_t* novo_no = criar_lista_encadeada_circular(valor);
+    if (!*inicio) {
+        *inicio = novo_no;
+        return;
+    }
+    if (indice <= 0) {
+        no_t* ultimo = *inicio;
+        while (ultimo->proximo != *inicio) {
+            ultimo = ultimo->proximo;
+        }
+        novo_no->proximo = *inicio;
+        ultimo->proximo = novo_no;
+        *inicio = novo_no;
+        return;
+    }
+    no_t* atual = *inicio;
+    no_t* anterior = NULL;
+    int i = 0;
+    do {
+        if (i == indice) break;
+        anterior = atual;
+        atual = atual->proximo;
+        i++;
+    } while (atual != *inicio);
+    if (i < indice && atual == *inicio) {
+        anterior->proximo = novo_no;
+        novo_no->proximo = *inicio;
+    } else {
+        anterior->proximo = novo_no;
+        novo_no->proximo = atual;
+    }
 }
 
 // ======== LISTAGEM ========
@@ -210,3 +264,4 @@ void destruir_lista_encadeada(no_t** inicio) {
     }
     *inicio = NULL;
 }
+

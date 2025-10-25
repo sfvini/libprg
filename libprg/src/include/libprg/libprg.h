@@ -65,6 +65,8 @@ no_t* criar_lista_encadeada(int valor);
 no_t* criar_lista_encadeada_circular(int valor);
 void inserir_lista_encadeada(no_t** inicio, int valor);
 void inserir_lista_encadeada_circular(no_t** inicio, int valor);
+void inserir_em_indice_lista_encadeada(no_t** inicio, int indice, int valor);
+void inserir_em_indice_lista_encadeada_circular(no_t** inicio, int indice, int valor);
 void listar_lista_encadeada(no_t* inicio);
 void listar_lista_encadeada_circular(no_t* inicio);
 no_t* buscar_lista_encadeada(no_t** inicio, int valor);
@@ -83,6 +85,7 @@ typedef struct no_duplo no_duplo_t;
 
 no_duplo_t* criar_lista_encadeada_dupla(int valor);
 void inserir_lista_encadeada_dupla(no_duplo_t** inicio, int valor);
+void inserir_em_indice_lista_encadeada_dupla(no_duplo_t** inicio, int indice, int valor);
 no_duplo_t* buscar_lista_encadeada_dupla(no_duplo_t* inicio, int valor);
 int buscar_por_indice_lista_encadeada_dupla(no_duplo_t* inicio, int indice);
 void listar_lista_encadeada_dupla(no_duplo_t* inicio);
