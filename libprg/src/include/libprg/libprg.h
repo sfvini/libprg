@@ -97,4 +97,9 @@ void excluir_item_lista_encadeada_dupla(no_duplo_t** inicio, int valor);
 void excluir_em_indice_lista_encadeada_dupla(no_duplo_t** inicio, int indice);
 void destruir_lista_encadeada_dupla(no_duplo_t** inicio);
 
+//ORDENACAO
+void bubble_sort(int* arr, int tamanho);
+void insertion_sort(int* arr, int tamanho);
+void selection_sort(int* arr, int tamanho);
+
 #endif
