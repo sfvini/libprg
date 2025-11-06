@@ -21,3 +21,19 @@ void insertion_sort(int* arr, int tamanho) {
         arr[j + 1] = key;
     }
 }
+
+void selection_sort(int* arr, int tamanho) {
+    for (int i = 0; i < tamanho - 1; i++) {
+        int min = i;
+        for (int j = i + 1; j < tamanho; j++) {
+            if (arr[min] > arr[j]) {
+                min = j;
+            }
+        }
+        if (min != i) {
+            int temp = arr[i];
+            arr[i] = arr[min];
+            arr[min] = temp;
+        }
+    }
+}
