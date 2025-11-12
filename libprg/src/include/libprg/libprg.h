@@ -101,5 +101,6 @@ void destruir_lista_encadeada_dupla(no_duplo_t** inicio);
 void bubble_sort(int* arr, int tamanho);
 void insertion_sort(int* arr, int tamanho);
 void selection_sort(int* arr, int tamanho);
+void mergeSort(int arr[], int left, int right)
 
 #endif
