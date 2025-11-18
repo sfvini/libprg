@@ -19,3 +19,11 @@ no_arvore_t *criar_no(int valor){
     return novo_no;
 }
 
+void destruir_arvore(no_arvore_t *raiz) {
+    if (raiz != NULL) {
+        destruir_arvore(raiz->esquerda);
+        destruir_arvore(raiz->direita);
+        free(raiz);
+    }
+}
+
