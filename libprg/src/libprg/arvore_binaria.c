@@ -31,7 +31,7 @@ no_arvore_t *inserir_valor(no_arvore_t *raiz, int valor){
     if (raiz == NULL) {
         return criar_no(valor);
     }
-    else if (valor < raiz->valor) {
+    if (valor < raiz->valor) {
         raiz->esquerda = inserir_valor(raiz->esquerda, valor);
     }
     else if (valor > raiz->valor) {
