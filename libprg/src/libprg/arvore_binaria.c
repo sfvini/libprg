@@ -47,4 +47,24 @@ bool busca(no_arvore_t *raiz, int valor) {
     return busca(raiz->direita, valor);
 }
 
+no_arvore_t *remover_valor(no_arvore_t *raiz, int valor) {
+    if (raiz == NULL) return raiz;
 
+    if (valor < raiz->valor) {
+        raiz->esquerda = remover_valor(raiz->esquerda, valor);
+    }
+
+    else if (valor > raiz->valor) {
+        raiz->direita = remover_valor(raiz->direita, valor);
+    }
+
+    else {
+        if (raiz->direita == NULL || raiz->esquerda == NULL) {
+
+        }
+        else {
+
+        }
+    }
+    return raiz;
+}
