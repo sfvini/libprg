@@ -53,17 +53,27 @@ no_arvore_t *remover_valor(no_arvore_t *raiz, int valor) {
     if (valor < raiz->valor) {
         raiz->esquerda = remover_valor(raiz->esquerda, valor);
     }
-
     else if (valor > raiz->valor) {
         raiz->direita = remover_valor(raiz->direita, valor);
     }
-
     else {
-        if (raiz->direita == NULL || raiz->esquerda == NULL) {
-
+        if (raiz->esquerda == NULL) {
+            no_arvore_t *temp = raiz->direita;
+            free(raiz);
+            return temp;
+        }
+        else if (raiz->direita == NULL) {
+            no_arvore_t *temp = raiz->esquerda;
+            free(raiz);
+            return temp;
         }
         else {
-
+            no_arvore_t *temp = raiz->direita;
+            while (temp->esquerda != NULL) {
+                temp = temp->esquerda;
+            }
+            raiz->valor = temp->valor;
+            raiz->direita = remover_valor(raiz->direita, temp->valor);
         }
     }
     return raiz;
