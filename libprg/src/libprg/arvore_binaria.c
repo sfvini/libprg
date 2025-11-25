@@ -62,19 +62,39 @@ no_arvore_t *remover_valor(no_arvore_t *raiz, int valor) {
             free(raiz);
             return temp;
         }
-        else if (raiz->direita == NULL) {
+        if (raiz->direita == NULL) {
             no_arvore_t *temp = raiz->esquerda;
             free(raiz);
             return temp;
         }
-        else {
             no_arvore_t *temp = raiz->direita;
             while (temp->esquerda != NULL) {
                 temp = temp->esquerda;
             }
             raiz->valor = temp->valor;
             raiz->direita = remover_valor(raiz->direita, temp->valor);
-        }
     }
     return raiz;
+}
+
+int maior_valor_arvore(no_arvore_t *raiz) {
+    if (!raiz) return -1;
+    no_arvore_t* atual = raiz;
+    while (atual->direita) atual = atual->direita;
+    return atual->valor;
+}
+
+int menor_valor_arvore(no_arvore_t *raiz) {
+    if (!raiz) return -1;
+    no_arvore_t* atual = raiz;
+    while (atual->esquerda) atual = atual->esquerda;
+    return atual->valor;
+}
+
+int altura_arvore(no_arvore_t* raiz) {
+    if (!raiz) return -1;
+    int altura_esquerda = altura_arvore(raiz->esquerda);
+    int altura_direita = altura_arvore(raiz->direita);
+    if (altura_direita > altura_esquerda) return altura_direita + 1;
+    return altura_esquerda + 1;
 }

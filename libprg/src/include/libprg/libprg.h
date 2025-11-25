@@ -110,6 +110,9 @@ no_arvore_t *criar_no(int valor);
 void destruir_arvore(no_arvore_t *raiz);
 no_arvore_t *inserir_valor(no_arvore_t *raiz, int valor);
 bool busca(no_arvore_t *raiz, int valor);
-
+no_arvore_t *remover_valor(no_arvore_t *raiz, int valor);
+int maior_valor_arvore(no_arvore_t *raiz);
+int menor_valor_arvore(no_arvore_t *raiz);
+int altura_arvore(no_arvore_t* raiz);
 
 #endif
