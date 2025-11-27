@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#define max(a,b) (((a) > (b)) ? (a) : (b))
 
 typedef struct no_arvore {
     int valor;

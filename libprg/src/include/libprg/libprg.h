@@ -104,7 +104,7 @@ void selection_sort(int* arr, int tamanho);
 void mergeSort(int arr[], int left, int right);
 void quickSort(int arr[], int low, int high);
 
-//ARVORE
+//ARVORE BINARIA
 typedef struct no_arvore no_arvore_t;
 no_arvore_t *criar_no(int valor);
 void destruir_arvore(no_arvore_t *raiz);
@@ -114,6 +114,7 @@ no_arvore_t *remover_valor(no_arvore_t *raiz, int valor);
 int maior_valor_arvore(no_arvore_t *raiz);
 int menor_valor_arvore(no_arvore_t *raiz);
 int altura_arvore(no_arvore_t* raiz);
+
 
 //DICIONARIO
 typedef struct pessoa_t;

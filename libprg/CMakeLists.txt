@@ -16,7 +16,7 @@ set(SOURCES
         "${CMAKE_CURRENT_LIST_DIR}/src/libprg/alg_ord_troca.c"
         "${CMAKE_CURRENT_LIST_DIR}/src/libprg/alg_ord_div.c"
         "${CMAKE_CURRENT_LIST_DIR}/src/libprg/arvore_binaria.c"
-        src/libprg/dicionario.c
+        "${CMAKE_CURRENT_LIST_DIR}/src/libprg/dicionario.c"
 )
 
 add_library(libprg ${SOURCES}
