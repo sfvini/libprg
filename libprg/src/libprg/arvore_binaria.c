@@ -1,194 +1,162 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
 typedef struct no_arvore {
     int valor;
     int altura;
-    struct no_arvore *esquerda;
-    struct no_arvore *direita;
+    struct no_arvore *esq, *dir;
 } no_arvore_t;
-
-int altura(no_arvore_t *no) {
-    if (!no) return -1;
-    return no->altura;
-}
-
-no_arvore_t *criar_no(int valor) {
-    no_arvore_t *novo = (no_arvore_t*)malloc(sizeof(no_arvore_t));
-    novo->valor = valor;
-    novo->altura = 0;
-    novo->esquerda = novo->direita = NULL;
-    return novo;
-}
-
-int fator_balanceamento(no_arvore_t *no) {
-    if (!no) return 0;
-    return altura(no->esquerda) - altura(no->direita);
-}
-
-no_arvore_t *rotacao_direita(no_arvore_t *y) {
-    no_arvore_t *x = y->esquerda;
-    no_arvore_t *T2 = x->direita;
-    x->direita = y;
-    y->esquerda = T2;
-    y->altura = max(altura(y->esquerda), altura(y->direita)) + 1;
-    x->altura = max(altura(x->esquerda), altura(x->direita)) + 1;
-    return x;
-}
-
-no_arvore_t *rotacao_esquerda(no_arvore_t *x) {
-    no_arvore_t *y = x->direita;
-    no_arvore_t *T2 = y->esquerda;
-    y->esquerda = x;
-    x->direita = T2;
-    x->altura = max(altura(x->esquerda), altura(x->direita)) + 1;
-    y->altura = max(altura(y->esquerda), altura(y->direita)) + 1;
-    return y;
-}
-
-no_arvore_t *balancear(no_arvore_t *no) {
-    int fb = fator_balanceamento(no);
-
-    if (fb > 1 && fator_balanceamento(no->esquerda) >= 0)
-        return rotacao_direita(no);
-
-    if (fb > 1 && fator_balanceamento(no->esquerda) < 0) {
-        no->esquerda = rotacao_esquerda(no->esquerda);
-        return rotacao_direita(no);
-    }
-
-    if (fb < -1 && fator_balanceamento(no->direita) <= 0)
-        return rotacao_esquerda(no);
-
-    if (fb < -1 && fator_balanceamento(no->direita) > 0) {
-        no->direita = rotacao_direita(no->direita);
-        return rotacao_esquerda(no);
-    }
-
-    return no;
-}
-
-no_arvore_t *inserir_valor(no_arvore_t *raiz, int valor) {
-    if (!raiz) return criar_no(valor);
-
-    if (valor < raiz->valor)
-        raiz->esquerda = inserir_valor(raiz->esquerda, valor);
-    else if (valor > raiz->valor)
-        raiz->direita = inserir_valor(raiz->direita, valor);
-    else
-        return raiz;
-
-    raiz->altura = max(altura(raiz->esquerda), altura(raiz->direita)) + 1;
-
-    return balancear(raiz);
-}
-
-no_arvore_t *menor_no(no_arvore_t *no) {
-    no_arvore_t *atual = no;
-    while (atual->esquerda)
-        atual = atual->esquerda;
-    return atual;
-}
-
-no_arvore_t *remover_valor(no_arvore_t *raiz, int valor) {
-    if (!raiz) return raiz;
-
-    if (valor < raiz->valor)
-        raiz->esquerda = remover_valor(raiz->esquerda, valor);
-    else if (valor > raiz->valor)
-        raiz->direita = remover_valor(raiz->direita, valor);
-    else {
-        if (!raiz->esquerda || !raiz->direita) {
-            no_arvore_t *temp = raiz->esquerda ? raiz->esquerda : raiz->direita;
-            if (!temp) {
-                temp = raiz;
-                raiz = NULL;
-            } else {
-                *raiz = *temp;
-            }
-            free(temp);
-        } else {
-            no_arvore_t *temp = menor_no(raiz->direita);
-            raiz->valor = temp->valor;
-            raiz->direita = remover_valor(raiz->direita, temp->valor);
-        }
-    }
-
-    if (!raiz) return raiz;
-
-    raiz->altura = max(altura(raiz->esquerda), altura(raiz->direita)) + 1;
-
-    return balancear(raiz);
-}
-
-bool busca(no_arvore_t *raiz, int valor) {
-    if (!raiz) return false;
-    if (valor == raiz->valor) return true;
-    if (valor < raiz->valor) return busca(raiz->esquerda, valor);
-    return busca(raiz->direita, valor);
-}
-
-void pre_ordem(no_arvore_t *raiz) {
-    if (!raiz) return;
-    printf("%d ", raiz->valor);
-    pre_ordem(raiz->esquerda);
-    pre_ordem(raiz->direita);
-}
-
-void em_ordem(no_arvore_t *raiz) {
-    if (!raiz) return;
-    em_ordem(raiz->esquerda);
-    printf("%d ", raiz->valor);
-    em_ordem(raiz->direita);
-}
-
-void pos_ordem(no_arvore_t *raiz) {
-    if (!raiz) return;
-    pos_ordem(raiz->esquerda);
-    pos_ordem(raiz->direita);
-    printf("%d ", raiz->valor);
-}
 
 typedef struct fila {
     no_arvore_t *no;
     struct fila *prox;
 } fila_t;
 
-void enfileirar(fila_t **ini, fila_t **fim, no_arvore_t *no) {
-    fila_t *novo = malloc(sizeof(fila_t));
-    novo->no = no;
-    novo->prox = NULL;
-    if (!*ini) *ini = novo;
-    else (*fim)->prox = novo;
-    *fim = novo;
+int altura_arvore(no_arvore_t *n) {
+    return n ? n->altura : -1;
 }
 
-no_arvore_t *desenfileirar(fila_t **ini) {
-    fila_t *temp = *ini;
-    no_arvore_t *no = temp->no;
-    *ini = temp->prox;
-    free(temp);
-    return no;
+int fb(no_arvore_t *n) {
+    return altura_arvore(n->esq) - altura_arvore(n->dir);
 }
 
-void largura(no_arvore_t *raiz) {
-    if (!raiz) return;
-    fila_t *ini = NULL, *fim = NULL;
-    enfileirar(&ini, &fim, raiz);
-    while (ini) {
-        no_arvore_t *no = desenfileirar(&ini);
-        printf("%d ", no->valor);
-        if (no->esquerda) enfileirar(&ini, &fim, no->esquerda);
-        if (no->direita) enfileirar(&ini, &fim, no->direita);
+no_arvore_t *novo_no(int v) {
+    no_arvore_t *n = malloc(sizeof(no_arvore_t));
+    n->valor = v;
+    n->altura = 0;
+    n->esq = n->dir = NULL;
+    return n;
+}
+
+no_arvore_t *rot_dir(no_arvore_t *y) {
+    no_arvore_t *x = y->esq;
+    y->esq = x->dir;
+    x->dir = y;
+    y->altura = max(altura_arvore(y->esq), altura_arvore(y->dir)) + 1;
+    x->altura = max(altura_arvore(x->esq), altura_arvore(x->dir)) + 1;
+    return x;
+}
+
+no_arvore_t *rot_esq(no_arvore_t *x) {
+    no_arvore_t *y = x->dir;
+    x->dir = y->esq;
+    y->esq = x;
+    x->altura = max(altura_arvore(x->esq), altura_arvore(x->dir)) + 1;
+    y->altura = max(altura_arvore(y->esq), altura_arvore(y->dir)) + 1;
+    return y;
+}
+
+no_arvore_t *balancear(no_arvore_t *r) {
+    int f = fb(r);
+    if (f > 1 && fb(r->esq) >= 0) return rot_dir(r);
+    if (f > 1 && fb(r->esq) < 0) {
+        r->esq = rot_esq(r->esq);
+        return rot_dir(r);
+    }
+    if (f < -1 && fb(r->dir) <= 0) return rot_esq(r);
+    if (f < -1 && fb(r->dir) > 0) {
+        r->dir = rot_dir(r->dir);
+        return rot_esq(r);
+    }
+    return r;
+}
+
+no_arvore_t *inserir_arvore(no_arvore_t *r, int v) {
+    if (!r) return novo_no(v);
+    if (v < r->valor) r->esq = inserir_arvore(r->esq, v);
+    else if (v > r->valor) r->dir = inserir_arvore(r->dir, v);
+    else return r;
+    r->altura = max(altura_arvore(r->esq), altura_arvore(r->dir)) + 1;
+    return balancear(r);
+}
+
+no_arvore_t *menor_no(no_arvore_t *n) {
+    while (n->esq) n = n->esq;
+    return n;
+}
+
+no_arvore_t *remover_arvore(no_arvore_t *r, int v) {
+    if (!r) return r;
+
+    if (v < r->valor) r->esq = remover_arvore(r->esq, v);
+    else if (v > r->valor) r->dir = remover_arvore(r->dir, v);
+    else {
+        if (!r->esq || !r->dir) {
+            no_arvore_t *t = r->esq ? r->esq : r->dir;
+            free(r);
+            return t;
+        }
+        no_arvore_t *t = menor_no(r->dir);
+        r->valor = t->valor;
+        r->dir = remover_arvore(r->dir, t->valor);
+    }
+
+    r->altura = max(altura_arvore(r->esq), altura_arvore(r->dir)) + 1;
+    return balancear(r);
+}
+
+bool busca_arvore(no_arvore_t *r, int v) {
+    if (!r) return false;
+    if (v == r->valor) return true;
+    return busca_arvore(v < r->valor ? r->esq : r->dir, v);
+}
+
+void pre_arvore(no_arvore_t *r) {
+    if (!r) return;
+    printf("%d ", r->valor);
+    pre_arvore(r->esq);
+    pre_arvore(r->dir);
+}
+
+void em_arvore(no_arvore_t *r) {
+    if (!r) return;
+    em_arvore(r->esq);
+    printf("%d ", r->valor);
+    em_arvore(r->dir);
+}
+
+void pos_arvore(no_arvore_t *r) {
+    if (!r) return;
+    pos_arvore(r->esq);
+    pos_arvore(r->dir);
+    printf("%d ", r->valor);
+}
+
+void enfileirar(fila_t **i, fila_t **f, no_arvore_t *n) {
+    fila_t *o = malloc(sizeof(fila_t));
+    o->no = n;
+    o->prox = NULL;
+    if (!*i) *i = o;
+    else (*f)->prox = o;
+    *f = o;
+}
+
+no_arvore_t *desenfileirar(fila_t **i) {
+    fila_t *t = *i;
+    no_arvore_t *n = t->no;
+    *i = t->prox;
+    free(t);
+    return n;
+}
+
+void largura_arvore(no_arvore_t *r) {
+    if (!r) return;
+    fila_t *i = NULL, *f = NULL;
+    enfileirar(&i, &f, r);
+    while (i) {
+        no_arvore_t *n = desenfileirar(&i);
+        printf("%d ", n->valor);
+        if (n->esq) enfileirar(&i, &f, n->esq);
+        if (n->dir) enfileirar(&i, &f, n->dir);
     }
 }
 
-void destruir_arvore(no_arvore_t *raiz) {
-    if (!raiz) return;
-    destruir_arvore(raiz->esquerda);
-    destruir_arvore(raiz->direita);
-    free(raiz);
+void destruir_arvore(no_arvore_t *r) {
+    if (!r) return;
+    destruir_arvore(r->esq);
+    destruir_arvore(r->dir);
+    free(r);
 }
-

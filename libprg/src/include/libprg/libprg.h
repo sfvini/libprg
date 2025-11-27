@@ -106,28 +106,29 @@ void quickSort(int arr[], int low, int high);
 
 //ARVORE BINARIA
 typedef struct no_arvore no_arvore_t;
-no_arvore_t *criar_no(int valor);
-void destruir_arvore(no_arvore_t *raiz);
-no_arvore_t *inserir_valor(no_arvore_t *raiz, int valor);
-no_arvore_t *remover_valor(no_arvore_t *raiz, int valor);
-bool busca(no_arvore_t *raiz, int valor);
-void pre_ordem(no_arvore_t *raiz);
-void em_ordem(no_arvore_t *raiz);
-void pos_ordem(no_arvore_t *raiz);
-void largura(no_arvore_t *raiz);
-
+no_arvore_t *inserir_arvore(no_arvore_t *r, int v);
+no_arvore_t *remover_arvore(no_arvore_t *r, int v);
+bool busca_arvore(no_arvore_t *r, int v);
+void pre_arvore(no_arvore_t *r);
+void em_arvore(no_arvore_t *r);
+void pos_arvore(no_arvore_t *r);
+void largura_arvore(no_arvore_t *r);
+int altura_arvore(no_arvore_t *n);
+int maior_valor_arvore(no_arvore_t *r);
+int menor_valor_arvore(no_arvore_t *r);
+void destruir_arvore(no_arvore_t *r);
 
 //DICIONARIO
-typedef struct pessoa_t;
+typedef struct pessoa pessoa_t;
 typedef struct no no_t;
 typedef struct dicionario dicionario_t;
 dicionario_t *criar_dicionario(int m);
 int hash(const char *chave, int m);
-void destruir_pessoa(struct pessoa_t *pessoa);
+void destruir_pessoa(pessoa_t *pessoa);
 void destruir_no(no_t *no);
 void destruir_dicionario(dicionario_t *d);
-bool inserir(dicionario_t *d, char *chave, struct pessoa_t *valor);
-struct pessoa_t *buscar(dicionario_t *d, char *chave);
+bool inserir_dicionario(dicionario_t *d, char *chave, pessoa_t *valor);
+pessoa_t *buscar_dicionario(dicionario_t *d, char *chave);
 void imprimir_pessoa(dicionario_t *d, char *chave);
 
 #endif

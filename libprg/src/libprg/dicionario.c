@@ -77,7 +77,7 @@ int hash(const char *chave, int m) {
     return soma % m;
 }
 
-bool inserir(dicionario_t *d, char *chave, pessoa_t *valor) {
+bool inserir_dicionario(dicionario_t *d, char *chave, pessoa_t *valor) {
     int indice = hash(chave, d->tamanho);
     no_t *no = malloc(sizeof(no_t));
     if (no == NULL) {
@@ -95,7 +95,7 @@ bool inserir(dicionario_t *d, char *chave, pessoa_t *valor) {
     return true;
 }
 
-pessoa_t *buscar(dicionario_t *d, char *chave) {
+pessoa_t *buscar_dicionario(dicionario_t *d, char *chave) {
     int indice = hash(chave, d->tamanho);
     if (d->vetor[indice] != NULL) {
         if (strcmp(d->vetor[indice]->chave, chave) == 0) {
@@ -106,7 +106,7 @@ pessoa_t *buscar(dicionario_t *d, char *chave) {
 }
 
 void imprimir_pessoa(dicionario_t *d, char *chave) {
-    pessoa_t *p = buscar(d, chave);
+    pessoa_t *p = buscar_dicionario(d, chave);
     if (p != NULL) {
         printf("CPF: %s\tNome: %s\tEmail: %s\n", p->cpf, p->nome, p->email);
     } else {
