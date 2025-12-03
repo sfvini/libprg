@@ -145,7 +145,7 @@ void imprimir_largura(no_arvore_t *raiz) {
     if (!raiz) return;
 
     int altura = altura_arvore(raiz) + 1;
-    int capacidade = pow(2, altura);
+    int capacidade = (int) pow(2, altura);
 
     fila_t *fila = criar_fila(capacidade);
 
