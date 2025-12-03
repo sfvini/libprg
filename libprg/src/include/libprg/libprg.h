@@ -106,17 +106,15 @@ void quickSort(int arr[], int low, int high);
 
 //ARVORE BINARIA
 typedef struct no_arvore no_arvore_t;
-no_arvore_t *inserir_arvore(no_arvore_t *r, int v);
-no_arvore_t *remover_arvore(no_arvore_t *r, int v);
-bool busca_arvore(no_arvore_t *r, int v);
-void pre_arvore(no_arvore_t *r);
-void em_arvore(no_arvore_t *r);
-void pos_arvore(no_arvore_t *r);
-void largura_arvore(no_arvore_t *r);
-int altura_arvore(no_arvore_t *n);
-int maior_valor_arvore(no_arvore_t *r);
-int menor_valor_arvore(no_arvore_t *r);
-void destruir_arvore(no_arvore_t *r);
+no_arvore_t *inserir_arvore(no_arvore_t *raiz, int valor);
+no_arvore_t *remover_arvore(no_arvore_t *raiz, int valor);
+bool busca_arvore(no_arvore_t *raiz, int valor);
+void pre_arvore(no_arvore_t *raiz);
+void em_arvore(no_arvore_t *raiz);
+void pos_arvore(no_arvore_t *raiz);
+void imprimir_largura(no_arvore_t *raiz);
+int altura_arvore(no_arvore_t *no);
+void destruir_arvore(no_arvore_t *raiz);
 
 //DICIONARIO
 typedef struct pessoa pessoa_t;

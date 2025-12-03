@@ -15,148 +15,162 @@ typedef struct fila {
     struct fila *prox;
 } fila_t;
 
-int altura_arvore(no_arvore_t *n) {
-    return n ? n->altura : -1;
+int altura_arvore(no_arvore_t *no) {
+    return no ? no->altura : -1;
 }
 
-int fb(no_arvore_t *n) {
-    return altura_arvore(n->esq) - altura_arvore(n->dir);
+int balanceamento(no_arvore_t *no) {
+    return altura_arvore(no->esq) - altura_arvore(no->dir);
 }
 
-no_arvore_t *novo_no(int v) {
-    no_arvore_t *n = malloc(sizeof(no_arvore_t));
-    n->valor = v;
-    n->altura = 0;
-    n->esq = n->dir = NULL;
-    return n;
+no_arvore_t *novo_no(int valor) {
+    no_arvore_t *no = malloc(sizeof(no_arvore_t));
+    no->valor = valor;
+    no->altura = 0;
+    no->esq = no->dir = NULL;
+    return no;
 }
 
-no_arvore_t *rot_dir(no_arvore_t *y) {
-    no_arvore_t *x = y->esq;
-    y->esq = x->dir;
-    x->dir = y;
-    y->altura = max(altura_arvore(y->esq), altura_arvore(y->dir)) + 1;
-    x->altura = max(altura_arvore(x->esq), altura_arvore(x->dir)) + 1;
-    return x;
+no_arvore_t *rot_dir(no_arvore_t *raiz) {
+    no_arvore_t *nova_raiz = raiz->esq;
+    raiz->esq = nova_raiz->dir;
+    nova_raiz->dir = raiz;
+    raiz->altura = max(altura_arvore(raiz->esq), altura_arvore(raiz->dir)) + 1;
+    nova_raiz->altura = max(altura_arvore(nova_raiz->esq), altura_arvore(nova_raiz->dir)) + 1;
+    return nova_raiz;
 }
 
-no_arvore_t *rot_esq(no_arvore_t *x) {
-    no_arvore_t *y = x->dir;
-    x->dir = y->esq;
-    y->esq = x;
-    x->altura = max(altura_arvore(x->esq), altura_arvore(x->dir)) + 1;
-    y->altura = max(altura_arvore(y->esq), altura_arvore(y->dir)) + 1;
-    return y;
+no_arvore_t *rot_esq(no_arvore_t *raiz) {
+    no_arvore_t *nova_raiz = raiz->dir;
+    raiz->dir = nova_raiz->esq;
+    nova_raiz->esq = raiz;
+    raiz->altura = max(altura_arvore(raiz->esq), altura_arvore(raiz->dir)) + 1;
+    nova_raiz->altura = max(altura_arvore(nova_raiz->esq), altura_arvore(nova_raiz->dir)) + 1;
+    return nova_raiz;
 }
 
-no_arvore_t *balancear(no_arvore_t *r) {
-    int f = fb(r);
-    if (f > 1 && fb(r->esq) >= 0) return rot_dir(r);
-    if (f > 1 && fb(r->esq) < 0) {
-        r->esq = rot_esq(r->esq);
-        return rot_dir(r);
+no_arvore_t *balancear(no_arvore_t *raiz) {
+    int f = balanceamento(raiz);
+    if (f > 1 && balanceamento(raiz->esq) >= 0) return rot_dir(raiz);
+    if (f > 1 && balanceamento(raiz->esq) < 0) {
+        raiz->esq = rot_esq(raiz->esq);
+        return rot_dir(raiz);
     }
-    if (f < -1 && fb(r->dir) <= 0) return rot_esq(r);
-    if (f < -1 && fb(r->dir) > 0) {
-        r->dir = rot_dir(r->dir);
-        return rot_esq(r);
+    if (f < -1 && balanceamento(raiz->dir) <= 0) return rot_esq(raiz);
+    if (f < -1 && balanceamento(raiz->dir) > 0) {
+        raiz->dir = rot_dir(raiz->dir);
+        return rot_esq(raiz);
     }
-    return r;
+    return raiz;
 }
 
-no_arvore_t *inserir_arvore(no_arvore_t *r, int v) {
-    if (!r) return novo_no(v);
-    if (v < r->valor) r->esq = inserir_arvore(r->esq, v);
-    else if (v > r->valor) r->dir = inserir_arvore(r->dir, v);
-    else return r;
-    r->altura = max(altura_arvore(r->esq), altura_arvore(r->dir)) + 1;
-    return balancear(r);
+no_arvore_t *inserir_arvore(no_arvore_t *raiz, int valor) {
+    if (!raiz) return novo_no(valor);
+    if (valor < raiz->valor) raiz->esq = inserir_arvore(raiz->esq, valor);
+    else if (valor > raiz->valor) raiz->dir = inserir_arvore(raiz->dir, valor);
+    else return raiz;
+    raiz->altura = max(altura_arvore(raiz->esq), altura_arvore(raiz->dir)) + 1;
+    return balancear(raiz);
 }
 
-no_arvore_t *menor_no(no_arvore_t *n) {
-    while (n->esq) n = n->esq;
-    return n;
+no_arvore_t *menor_no(no_arvore_t *no) {
+    while (no->esq) no = no->esq;
+    return no;
 }
 
-no_arvore_t *remover_arvore(no_arvore_t *r, int v) {
-    if (!r) return r;
+no_arvore_t *remover_arvore(no_arvore_t *raiz, int valor) {
+    if (!raiz) return raiz;
 
-    if (v < r->valor) r->esq = remover_arvore(r->esq, v);
-    else if (v > r->valor) r->dir = remover_arvore(r->dir, v);
+    if (valor < raiz->valor) raiz->esq = remover_arvore(raiz->esq, valor);
+    else if (valor > raiz->valor) raiz->dir = remover_arvore(raiz->dir, valor);
     else {
-        if (!r->esq || !r->dir) {
-            no_arvore_t *t = r->esq ? r->esq : r->dir;
-            free(r);
+        if (!raiz->esq || !raiz->dir) {
+            no_arvore_t *t = raiz->esq ? raiz->esq : raiz->dir;
+            free(raiz);
             return t;
         }
-        no_arvore_t *t = menor_no(r->dir);
-        r->valor = t->valor;
-        r->dir = remover_arvore(r->dir, t->valor);
+        no_arvore_t *t = menor_no(raiz->dir);
+        raiz->valor = t->valor;
+        raiz->dir = remover_arvore(raiz->dir, t->valor);
     }
 
-    r->altura = max(altura_arvore(r->esq), altura_arvore(r->dir)) + 1;
-    return balancear(r);
+    raiz->altura = max(altura_arvore(raiz->esq), altura_arvore(raiz->dir)) + 1;
+    return balancear(raiz);
 }
 
-bool busca_arvore(no_arvore_t *r, int v) {
-    if (!r) return false;
-    if (v == r->valor) return true;
-    return busca_arvore(v < r->valor ? r->esq : r->dir, v);
+bool busca_arvore(no_arvore_t *raiz, int valor) {
+    if (!raiz) return false;
+    if (valor == raiz->valor) return true;
+    return busca_arvore(valor < raiz->valor ? raiz->esq : raiz->dir, valor);
 }
 
-void pre_arvore(no_arvore_t *r) {
-    if (!r) return;
-    printf("%d ", r->valor);
-    pre_arvore(r->esq);
-    pre_arvore(r->dir);
+void pre_arvore(no_arvore_t *raiz) {
+    if (!raiz) return;
+    printf("%d ", raiz->valor);
+    pre_arvore(raiz->esq);
+    pre_arvore(raiz->dir);
 }
 
-void em_arvore(no_arvore_t *r) {
-    if (!r) return;
-    em_arvore(r->esq);
-    printf("%d ", r->valor);
-    em_arvore(r->dir);
+void em_arvore(no_arvore_t *raiz) {
+    if (!raiz) return;
+    em_arvore(raiz->esq);
+    printf("%d ", raiz->valor);
+    em_arvore(raiz->dir);
 }
 
-void pos_arvore(no_arvore_t *r) {
-    if (!r) return;
-    pos_arvore(r->esq);
-    pos_arvore(r->dir);
-    printf("%d ", r->valor);
+void pos_arvore(no_arvore_t *raiz) {
+    if (!raiz) return;
+    pos_arvore(raiz->esq);
+    pos_arvore(raiz->dir);
+    printf("%d ", raiz->valor);
 }
 
-void enfileirar(fila_t **i, fila_t **f, no_arvore_t *n) {
-    fila_t *o = malloc(sizeof(fila_t));
-    o->no = n;
-    o->prox = NULL;
-    if (!*i) *i = o;
-    else (*f)->prox = o;
-    *f = o;
+void enfileirar(fila_t **inicio, fila_t **fim, no_arvore_t *no) {
+    fila_t *novo_no = malloc(sizeof(fila_t));
+    novo_no->no = no;
+    novo_no->prox = NULL;
+
+    if (!*inicio)
+        *inicio = novo_no;
+    else
+        (*fim)->prox = novo_no;
+
+    *fim = novo_no;
 }
 
-no_arvore_t *desenfileirar(fila_t **i) {
-    fila_t *t = *i;
-    no_arvore_t *n = t->no;
-    *i = t->prox;
-    free(t);
-    return n;
+no_arvore_t *desenfileirar(fila_t **inicio) {
+    fila_t *primeiro = *inicio;
+    no_arvore_t *no_removido = primeiro->no;
+
+    *inicio = primeiro->prox;
+    free(primeiro);
+
+    return no_removido;
 }
 
-void largura_arvore(no_arvore_t *r) {
-    if (!r) return;
-    fila_t *i = NULL, *f = NULL;
-    enfileirar(&i, &f, r);
-    while (i) {
-        no_arvore_t *n = desenfileirar(&i);
-        printf("%d ", n->valor);
-        if (n->esq) enfileirar(&i, &f, n->esq);
-        if (n->dir) enfileirar(&i, &f, n->dir);
+void imprimir_largura(no_arvore_t *raiz) {
+    if (!raiz) return;
+
+    fila_t *inicio = NULL, *fim = NULL;
+
+    enfileirar(&inicio, &fim, raiz);
+
+    while (inicio) {
+        no_arvore_t *no_atual = desenfileirar(&inicio);
+
+        printf("%d ", no_atual->valor);
+
+        if (no_atual->esq)
+            enfileirar(&inicio, &fim, no_atual->esq);
+
+        if (no_atual->dir)
+            enfileirar(&inicio, &fim, no_atual->dir);
     }
 }
 
-void destruir_arvore(no_arvore_t *r) {
-    if (!r) return;
-    destruir_arvore(r->esq);
-    destruir_arvore(r->dir);
-    free(r);
+void destruir_arvore(no_arvore_t *raiz) {
+    if (!raiz) return;
+    destruir_arvore(raiz->esq);
+    destruir_arvore(raiz->dir);
+    free(raiz);
 }
