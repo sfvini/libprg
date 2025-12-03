@@ -104,6 +104,21 @@ bool busca_arvore(no_arvore_t *raiz, int valor) {
     return busca_arvore(valor < raiz->valor ? raiz->esq : raiz->dir, valor);
 }
 
+int menor_valor_arvore(no_arvore_t *r) {
+    if (!r) return -1;
+    while (r->esq)
+        r = r->esq;
+    return r->valor;
+}
+
+int maior_valor_arvore(no_arvore_t *r) {
+    if (!r) return -1;
+    while (r->dir)
+        r = r->dir;
+    return r->valor;
+}
+
+
 void pre_arvore(no_arvore_t *raiz) {
     if (!raiz) return;
     printf("%d ", raiz->valor);
