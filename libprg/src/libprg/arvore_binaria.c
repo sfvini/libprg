@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "libprg/libprg.h"
+#include <math.h>
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
@@ -139,47 +141,40 @@ void pos_arvore(no_arvore_t *raiz) {
     printf("%d ", raiz->valor);
 }
 
-void enfileirar(fila_t **inicio, fila_t **fim, no_arvore_t *no) {
-    fila_t *novo_no = malloc(sizeof(fila_t));
-    novo_no->no = no;
-    novo_no->prox = NULL;
-
-    if (!*inicio)
-        *inicio = novo_no;
-    else
-        (*fim)->prox = novo_no;
-
-    *fim = novo_no;
-}
-
-no_arvore_t *desenfileirar(fila_t **inicio) {
-    fila_t *primeiro = *inicio;
-    no_arvore_t *no_removido = primeiro->no;
-
-    *inicio = primeiro->prox;
-    free(primeiro);
-
-    return no_removido;
-}
-
 void imprimir_largura(no_arvore_t *raiz) {
     if (!raiz) return;
 
-    fila_t *inicio = NULL, *fim = NULL;
+    int altura = altura_arvore(raiz) + 1;
+    int capacidade = pow(2, altura);
 
-    enfileirar(&inicio, &fim, raiz);
+    fila_t *fila = criar_fila(capacidade);
 
-    while (inicio) {
-        no_arvore_t *no_atual = desenfileirar(&inicio);
+    no_arvore_t **auxiliar = malloc(sizeof(no_arvore_t*) * capacidade);
 
-        printf("%d ", no_atual->valor);
+    auxiliar[0] = raiz;
+    enfileirar(fila, 0);
 
-        if (no_atual->esq)
-            enfileirar(&inicio, &fim, no_atual->esq);
+    while (tamanho_fila(fila) > 0) {
+        int index = inicio_fila(fila);
+        desenfileirar(fila);
 
-        if (no_atual->dir)
-            enfileirar(&inicio, &fim, no_atual->dir);
+        no_arvore_t *atual = auxiliar[index];
+
+        printf("%d ", atual->valor);
+
+        if (atual->esq) {
+            auxiliar[++index] = atual->esq;
+            enfileirar(fila, index);
+        }
+
+        if (atual->dir) {
+            auxiliar[++index] = atual->dir;
+            enfileirar(fila, index);
+        }
     }
+
+    free(auxiliar);
+    destruir_fila(fila);
 }
 
 void destruir_arvore(no_arvore_t *raiz) {
