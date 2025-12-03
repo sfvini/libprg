@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "libprg/libprg.h"
-#include <math.h>
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
@@ -145,7 +144,7 @@ void imprimir_largura(no_arvore_t *raiz) {
     if (!raiz) return;
 
     int altura = altura_arvore(raiz) + 1;
-    int capacidade = (int) pow(2, altura);
+    int capacidade = 1 << altura;
 
     fila_t *fila = criar_fila(capacidade);
 
