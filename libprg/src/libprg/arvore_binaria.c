@@ -148,31 +148,35 @@ void imprimir_largura(no_arvore_t *raiz) {
 
     fila_t *fila = criar_fila(capacidade);
 
-    no_arvore_t **auxiliar = malloc(sizeof(no_arvore_t*) * capacidade);
+    no_arvore_t **buffer = malloc(sizeof(no_arvore_t*) * capacidade);
 
-    auxiliar[0] = raiz;
+    int proximo = 1;
+
+    buffer[0] = raiz;
     enfileirar(fila, 0);
 
     while (tamanho_fila(fila) > 0) {
         int index = inicio_fila(fila);
         desenfileirar(fila);
 
-        no_arvore_t *atual = auxiliar[index];
+        no_arvore_t *atual = buffer[index];
 
         printf("%d ", atual->valor);
 
         if (atual->esq) {
-            auxiliar[++index] = atual->esq;
-            enfileirar(fila, index);
+            buffer[proximo] = atual->esq;
+            enfileirar(fila, proximo);
+            proximo++;
         }
 
         if (atual->dir) {
-            auxiliar[++index] = atual->dir;
-            enfileirar(fila, index);
+            buffer[proximo] = atual->dir;
+            enfileirar(fila, proximo);
+            proximo++;
         }
     }
 
-    free(auxiliar);
+    free(buffer);
     destruir_fila(fila);
 }
 
