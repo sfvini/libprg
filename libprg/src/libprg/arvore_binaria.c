@@ -65,25 +65,37 @@ no_arvore_t *balancear(no_arvore_t *raiz) {
     return raiz;
 }
 
-no_arvore_t *inserir_arvore(no_arvore_t *raiz, int valor) {
+no_arvore_t *inserir_arvore_avl(no_arvore_t *raiz, int valor) {
     if (!raiz) return novo_no(valor);
-    if (valor < raiz->valor) raiz->esq = inserir_arvore(raiz->esq, valor);
-    else if (valor > raiz->valor) raiz->dir = inserir_arvore(raiz->dir, valor);
+    if (valor < raiz->valor) raiz->esq = inserir_arvore_avl(raiz->esq, valor);
+    else if (valor > raiz->valor) raiz->dir = inserir_arvore_avl(raiz->dir, valor);
     else return raiz;
     raiz->altura = max(altura_arvore(raiz->esq), altura_arvore(raiz->dir)) + 1;
     return balancear(raiz);
 }
+
+no_arvore_t *inserir_arvore_bst(no_arvore_t *raiz, int valor) {
+    if (!raiz) return novo_no(valor);
+
+    if (valor < raiz->valor)
+        raiz->esq = inserir_arvore_bst(raiz->esq, valor);
+    else if (valor > raiz->valor)
+        raiz->dir = inserir_arvore_bst(raiz->dir, valor);
+
+    return raiz;
+}
+
 
 no_arvore_t *menor_no(no_arvore_t *no) {
     while (no->esq) no = no->esq;
     return no;
 }
 
-no_arvore_t *remover_arvore(no_arvore_t *raiz, int valor) {
+no_arvore_t *remover_arvore_avl(no_arvore_t *raiz, int valor) {
     if (!raiz) return raiz;
 
-    if (valor < raiz->valor) raiz->esq = remover_arvore(raiz->esq, valor);
-    else if (valor > raiz->valor) raiz->dir = remover_arvore(raiz->dir, valor);
+    if (valor < raiz->valor) raiz->esq = remover_arvore_avl(raiz->esq, valor);
+    else if (valor > raiz->valor) raiz->dir = remover_arvore_avl(raiz->dir, valor);
     else {
         if (!raiz->esq || !raiz->dir) {
             no_arvore_t *t = raiz->esq ? raiz->esq : raiz->dir;
@@ -92,11 +104,31 @@ no_arvore_t *remover_arvore(no_arvore_t *raiz, int valor) {
         }
         no_arvore_t *t = menor_no(raiz->dir);
         raiz->valor = t->valor;
-        raiz->dir = remover_arvore(raiz->dir, t->valor);
+        raiz->dir = remover_arvore_avl(raiz->dir, t->valor);
     }
 
     raiz->altura = max(altura_arvore(raiz->esq), altura_arvore(raiz->dir)) + 1;
     return balancear(raiz);
+}
+
+no_arvore_t *remover_arvore_bst(no_arvore_t *raiz, int valor) {
+    if (!raiz) return NULL;
+
+    if (valor < raiz->valor)
+        raiz->esq = remover_arvore_bst(raiz->esq, valor);
+    else if (valor > raiz->valor)
+        raiz->dir = remover_arvore_bst(raiz->dir, valor);
+    else {
+        if (!raiz->esq || !raiz->dir) {
+            no_arvore_t *t = raiz->esq ? raiz->esq : raiz->dir;
+            free(raiz);
+            return t;
+        }
+        no_arvore_t *t = menor_no(raiz->dir);
+        raiz->valor = t->valor;
+        raiz->dir = remover_arvore_bst(raiz->dir, t->valor);
+    }
+    return raiz;
 }
 
 bool busca_arvore(no_arvore_t *raiz, int valor) {
