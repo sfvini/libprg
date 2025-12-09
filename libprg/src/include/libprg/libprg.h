@@ -106,8 +106,10 @@ void quickSort(int arr[], int low, int high);
 
 //ARVORE BINARIA
 typedef struct no_arvore no_arvore_t;
-no_arvore_t *inserir_arvore(no_arvore_t *raiz, int valor);
-no_arvore_t *remover_arvore(no_arvore_t *raiz, int valor);
+no_arvore_t *inserir_arvore_bst(no_arvore_t *raiz, int valor);
+no_arvore_t *inserir_arvore_avl(no_arvore_t *raiz, int valor);
+no_arvore_t *remover_arvore_bst(no_arvore_t *raiz, int valor);
+no_arvore_t *remover_arvore_avl(no_arvore_t *raiz, int valor);
 bool busca_arvore(no_arvore_t *raiz, int valor);
 void pre_arvore(no_arvore_t *raiz);
 void em_arvore(no_arvore_t *raiz);
