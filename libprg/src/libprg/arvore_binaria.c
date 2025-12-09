@@ -172,49 +172,29 @@ void pos_arvore(no_arvore_t *raiz) {
     printf("%d ", raiz->valor);
 }
 
-void imprimir_largura(no_arvore_t *raiz) {
-    if (!raiz) return;
-
-    int altura = altura_arvore(raiz) + 1;
-    int capacidade = 1 << altura;
-
-    fila_t *fila = criar_fila(capacidade);
-
-    no_arvore_t **buffer = malloc(sizeof(no_arvore_t*) * capacidade);
-
-    int proximo = 1;
-
-    buffer[0] = raiz;
-    enfileirar(fila, 0);
-
-    while (tamanho_fila(fila) > 0) {
-        int index = inicio_fila(fila);
-        desenfileirar(fila);
-
-        no_arvore_t *atual = buffer[index];
-
-        printf("%d ", atual->valor);
-
-        if (atual->esq) {
-            buffer[proximo] = atual->esq;
-            enfileirar(fila, proximo);
-            proximo++;
-        }
-
-        if (atual->dir) {
-            buffer[proximo] = atual->dir;
-            enfileirar(fila, proximo);
-            proximo++;
-        }
-    }
-
-    free(buffer);
-    destruir_fila(fila);
-}
-
 void destruir_arvore(no_arvore_t *raiz) {
     if (!raiz) return;
     destruir_arvore(raiz->esq);
     destruir_arvore(raiz->dir);
     free(raiz);
+}
+
+int contar_nos(no_arvore_t *raiz) {
+    if (!raiz) return 0;
+    return 1 + contar_nos(raiz->esq) + contar_nos(raiz->dir);
+}
+
+void imprimir_largura(no_arvore_t *raiz) {
+    if (!raiz) return;
+    int n = contar_nos(raiz);
+    no_arvore_t **fila = malloc(sizeof(no_arvore_t*) * n);
+    int cabeca = 0, ponta = 0;
+    fila[ponta++] = raiz;
+    while (cabeca < ponta) {
+        no_arvore_t *atual = fila[cabeca++];
+        printf("%d ", atual->valor);
+        if (atual->esq) fila[ponta++] = atual->esq;
+        if (atual->dir) fila[ponta++] = atual->dir;
+    }
+    free(fila);
 }
