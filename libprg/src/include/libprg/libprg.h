@@ -116,9 +116,12 @@ void em_arvore(no_arvore_t *raiz);
 void pos_arvore(no_arvore_t *raiz);
 void imprimir_largura(no_arvore_t *raiz);
 int altura_arvore(no_arvore_t *no);
-int maior_valor_arvore(no_arvore_t *r);
-int menor_valor_arvore(no_arvore_t *r);
+int maior_valor_arvore(no_arvore_t *raiz);
+int menor_valor_arvore(no_arvore_t *raiz);
 void destruir_arvore(no_arvore_t *raiz);
+int contar_nos(no_arvore_t *raiz);
+int contar_folhas(no_arvore_t *raiz);
+no_arvore_t* buscar_no_ptr(no_arvore_t *raiz, int valor);
 
 //DICIONARIO
 typedef struct pessoa pessoa_t;

@@ -218,3 +218,21 @@ void destruir_arvore(no_arvore_t *raiz) {
     destruir_arvore(raiz->dir);
     free(raiz);
 }
+
+int contar_nos(no_arvore_t *raiz) {
+    if (!raiz) return 0;
+    return 1 + contar_nos(raiz->esq) + contar_nos(raiz->dir);
+}
+
+int contar_folhas(no_arvore_t *raiz) {
+    if (!raiz) return 0;
+    if (!raiz->esq && !raiz->dir) return 1;
+    return contar_folhas(raiz->esq) + contar_folhas(raiz->dir);
+}
+
+no_arvore_t* buscar_no_ptr(no_arvore_t *raiz, int valor) {
+    if (!raiz) return NULL;
+    if (valor == raiz->valor) return raiz;
+    if (valor < raiz->valor) return buscar_no_ptr(raiz->esq, valor);
+    return buscar_no_ptr(raiz->dir, valor);
+}
